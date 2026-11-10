@@ -1,0 +1,110 @@
+/* Design tokens. Tudo que é cor, medida ou tempo nasce aqui. */
+:root {
+  color-scheme: light;
+
+  --fonte: "Geist", "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --fonte-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --t-xs: 0.75rem;
+  --t-sm: 0.8125rem;
+  --t-base: 0.9375rem;
+  --t-md: 1.0625rem;
+  --t-lg: 1.375rem;
+  --t-xl: clamp(1.75rem, 1.3rem + 2vw, 2.5rem);
+
+  --e-1: 4px;
+  --e-2: 8px;
+  --e-3: 12px;
+  --e-4: 16px;
+  --e-5: 24px;
+  --e-6: 32px;
+  --e-7: 48px;
+  --e-8: 72px;
+
+  --raio-p: 6px;
+  --raio: 10px;
+  --raio-g: 16px;
+
+  --rapido: 150ms;
+  --medio: 240ms;
+  --lento: 350ms;
+  /* Aproximação de mola (leve ultrapassagem). Molas reais: js/ui/motion.js */
+  --mola: cubic-bezier(0.34, 1.36, 0.64, 1);
+  --suave: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  --topo-altura: 56px;
+  --coluna: 44rem;
+
+  /* Paleta neutra (claro) */
+  --fundo: #fbfbfa;
+  --superficie: #ffffff;
+  --superficie-2: #f2f2ef;
+  --borda: #e5e4df;
+  --borda-forte: #cfcec7;
+  --texto: #1a1a18;
+  --texto-2: #55544e;
+  --texto-3: #6b6a63;
+  --destaque: #2a53d8;
+  --destaque-texto: #ffffff;
+  --ok: #17794a;
+  --erro: #b3352d;
+  --alerta: #855600;
+  --sombra: 0 1px 2px rgb(0 0 0 / 0.04), 0 8px 24px rgb(0 0 0 / 0.06);
+  --sombra-forte: 0 2px 6px rgb(0 0 0 / 0.06), 0 24px 64px rgb(0 0 0 / 0.16);
+
+  /* Cor semântica por tema: cada tema só define o matiz (--tema-h) */
+  --tema-l: 47%;
+  --tema-c: 0.115;
+  --tema-h: 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-tema="claro"]) {
+    color-scheme: dark;
+    --fundo: #111110;
+    --superficie: #191918;
+    --superficie-2: #232322;
+    --borda: #2d2d2b;
+    --borda-forte: #42423f;
+    --texto: #ededea;
+    --texto-2: #b3b2ab;
+    --texto-3: #96958e;
+    --destaque: #8eaaff;
+    --destaque-texto: #0b1020;
+    --ok: #5fca93;
+    --erro: #f29085;
+    --alerta: #e2b65a;
+    --sombra: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px rgb(0 0 0 / 0.35);
+    --sombra-forte: 0 2px 6px rgb(0 0 0 / 0.4), 0 24px 64px rgb(0 0 0 / 0.6);
+    --tema-l: 80%;
+    --tema-c: 0.1;
+  }
+}
+
+:root[data-tema="escuro"] {
+  color-scheme: dark;
+  --fundo: #111110;
+  --superficie: #191918;
+  --superficie-2: #232322;
+  --borda: #2d2d2b;
+  --borda-forte: #42423f;
+  --texto: #ededea;
+  --texto-2: #b3b2ab;
+  --texto-3: #96958e;
+  --destaque: #8eaaff;
+  --destaque-texto: #0b1020;
+  --ok: #5fca93;
+  --erro: #f29085;
+  --alerta: #e2b65a;
+  --sombra: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px rgb(0 0 0 / 0.35);
+  --sombra-forte: 0 2px 6px rgb(0 0 0 / 0.4), 0 24px 64px rgb(0 0 0 / 0.6);
+  --tema-l: 80%;
+  --tema-c: 0.1;
+}
+
+/* Qualquer elemento com .cor-tema e --tema-h inline ganha a cor do tema. */
+:root,
+.cor-tema {
+  --tema: oklch(var(--tema-l) var(--tema-c) var(--tema-h));
+  --tema-suave: oklch(var(--tema-l) var(--tema-c) var(--tema-h) / 0.12);
+}

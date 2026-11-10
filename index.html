@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Normas Interativas — NBR 6118</title>
+    <meta name="description" content="Aprenda a NBR 6118 de forma visual: mapa mental, conceitos conectados, simuladores e fluxogramas de decisão. Ferramenta de estudo.">
+    <meta name="theme-color" content="#fbfbfa" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#111110" media="(prefers-color-scheme: dark)">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231a1a18'/%3E%3Cpath d='M9 22V10h3.2l7.6 8.2V10H23v12h-3.2l-7.6-8.2V22z' fill='%23fbfbfa'/%3E%3C/svg%3E">
+    <script>
+      // Aplica o tema salvo antes da primeira pintura (evita piscar).
+      try {
+        var t = JSON.parse(localStorage.getItem("normas-interativas:v1") || "{}").tema;
+        if (t === "claro" || t === "escuro") document.documentElement.dataset.tema = t;
+      } catch (e) {}
+    </script>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="./css/tokens.css">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/shell.css">
+    <link rel="stylesheet" href="./css/components.css">
+    <link rel="stylesheet" href="./css/views.css">
+    <link rel="modulepreload" href="./js/main.js">
+    <link rel="preload" href="./content/normas.json" as="fetch" crossorigin>
+  </head>
+  <body>
+    <a class="pular" href="#conteudo" data-acao="pular">Pular para o conteúdo</a>
+
+    <header class="topo">
+      <a class="marca" href="#/" aria-label="Normas Interativas, início">
+        <span class="marca-logo" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 14 12"><path d="M0 12V0h3.2l7.6 8.2V0H14v12h-3.2L3.2 3.8V12z" fill="currentColor"/></svg>
+        </span>
+        <span>Normas Interativas</span>
+      </a>
+      <nav class="nav" aria-label="Principal">
+        <a href="#/" data-nav="home"><span data-icone="mapa"></span>Mapa</a>
+        <a href="#/pareto" data-nav="pareto"><span data-icone="alvo"></span>Os 20%</a>
+        <a href="#/grafo" data-nav="grafo"><span data-icone="grafo"></span>Grafo</a>
+      </nav>
+      <div class="topo-acoes">
+        <button class="busca-gatilho" type="button" data-acao="buscar" aria-label="Buscar conceitos" aria-keyshortcuts="Control+K Meta+K">
+          <span data-icone="busca" style="flex:none"></span><span>Buscar conceitos</span><kbd data-atalho-busca>Ctrl K</kbd>
+        </button>
+        <button class="icone-btn" type="button" data-acao="tema" aria-label="Alternar tema"><span data-icone="monitor"></span></button>
+      </div>
+    </header>
+
+    <main id="conteudo" tabindex="-1">
+      <div class="esqueleto" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    </main>
+
+    <footer class="aviso">Ferramenta de estudo. Não substitui a consulta à norma vigente.</footer>
+
+    <noscript><p style="padding:24px;text-align:center">Este aplicativo precisa de JavaScript para funcionar.</p></noscript>
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>

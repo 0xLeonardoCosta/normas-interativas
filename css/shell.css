@@ -1,0 +1,262 @@
+/* Estrutura fixa: topo, área de conteúdo, aviso e navegação. */
+.pular {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 100;
+  padding: 8px 14px;
+  border-radius: var(--raio-p);
+  background: var(--texto);
+  color: var(--fundo);
+  transform: translateY(-200%);
+  transition: transform var(--rapido) var(--suave);
+}
+
+.pular:focus-visible {
+  transform: none;
+}
+
+.topo {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  height: var(--topo-altura);
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: var(--e-4);
+  padding: 0 max(var(--e-4), env(safe-area-inset-left)) 0 max(var(--e-4), env(safe-area-inset-right));
+  border-bottom: 1px solid var(--borda);
+}
+
+/* O desfoque fica em um pseudo-elemento: backdrop-filter no próprio header criaria um
+   bloco de contenção e prenderia a navegação fixa do celular dentro dele. */
+.topo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: color-mix(in oklab, var(--fundo) 86%, transparent);
+  backdrop-filter: saturate(1.4) blur(12px);
+  -webkit-backdrop-filter: saturate(1.4) blur(12px);
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.marca-logo {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: var(--texto);
+  color: var(--fundo);
+  display: grid;
+  place-items: center;
+}
+
+.nav {
+  display: flex;
+  gap: 2px;
+  margin-left: var(--e-3);
+}
+
+.nav a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: var(--raio-p);
+  color: var(--texto-2);
+  font-size: var(--t-sm);
+  font-weight: 500;
+  transition: color var(--rapido), background-color var(--rapido);
+}
+
+.nav a:hover {
+  color: var(--texto);
+  background: var(--superficie-2);
+}
+
+.nav a[aria-current="page"] {
+  color: var(--texto);
+}
+
+.nav a[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: -11px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--texto);
+}
+
+.topo-acoes {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--e-2);
+}
+
+.busca-gatilho {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 34px;
+  min-width: 200px;
+  padding: 0 8px 0 10px;
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  background: var(--superficie);
+  color: var(--texto-3);
+  font-size: var(--t-sm);
+  transition: border-color var(--rapido), transform var(--rapido) var(--mola);
+}
+
+.busca-gatilho span {
+  flex: 1;
+  text-align: left;
+}
+
+.busca-gatilho:hover {
+  border-color: var(--borda-forte);
+}
+
+.busca-gatilho:active,
+.icone-btn:active {
+  transform: scale(0.96);
+}
+
+.icone-btn {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--raio);
+  color: var(--texto-2);
+  transition: background-color var(--rapido), color var(--rapido), transform var(--rapido) var(--mola);
+}
+
+.icone-btn:hover {
+  background: var(--superficie-2);
+  color: var(--texto);
+}
+
+#conteudo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.aviso {
+  flex: none;
+  padding: 6px var(--e-4);
+  text-align: center;
+  font-size: var(--t-xs);
+  color: var(--texto-3);
+  border-top: 1px solid var(--borda);
+  background: var(--fundo);
+}
+
+/* Barra de carregamento do roteador: só aparece se a tela demorar. */
+.carregando-barra {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 2px;
+  z-index: 60;
+  background: var(--destaque);
+  transform-origin: left;
+  transform: scaleX(0);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms;
+}
+
+.carregando-barra.ativa {
+  opacity: 1;
+  transform: scaleX(0.85);
+  transition: transform 4s cubic-bezier(0.1, 0.7, 0.1, 1), opacity 100ms;
+}
+
+/* Esqueleto da primeira pintura */
+.esqueleto {
+  width: min(var(--coluna), 100% - 2 * var(--e-4));
+  margin: var(--e-7) auto;
+  display: grid;
+  gap: var(--e-4);
+}
+
+.esqueleto i {
+  display: block;
+  height: 14px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--superficie-2) 40%, var(--borda) 50%, var(--superficie-2) 60%) 0 0 / 200% 100%;
+  animation: brilho 1.4s linear infinite;
+}
+
+.esqueleto i:first-child {
+  height: 34px;
+  width: 55%;
+}
+
+.esqueleto i:nth-child(3) {
+  width: 80%;
+}
+
+.esqueleto i:nth-child(4) {
+  width: 65%;
+}
+
+@media (max-width: 720px) {
+  .busca-gatilho {
+    min-width: 0;
+    width: 34px;
+    padding: 0;
+    justify-content: center;
+    border-color: transparent;
+    background: none;
+    color: var(--texto-2);
+  }
+
+  .busca-gatilho span,
+  .busca-gatilho kbd {
+    display: none;
+  }
+
+  /* No celular a navegação vira barra inferior, ao alcance do polegar. */
+  .nav {
+    position: fixed;
+    inset: auto 0 0 0;
+    z-index: 20;
+    margin: 0;
+    padding: 6px var(--e-2) calc(6px + env(safe-area-inset-bottom));
+    justify-content: space-around;
+    background: var(--fundo);
+    border-top: 1px solid var(--borda);
+  }
+
+  .nav a {
+    flex: 1;
+    flex-direction: column;
+    gap: 2px;
+    padding: 6px 4px;
+    font-size: var(--t-xs);
+  }
+
+  .nav a[aria-current="page"]::after {
+    display: none;
+  }
+
+  body {
+    padding-bottom: calc(58px + env(safe-area-inset-bottom));
+  }
+}
