@@ -1,0 +1,205 @@
+{
+  "norma": "nbr6118",
+  "versao": "2023",
+  "conceitos": [
+    {
+      "id": "nbr6118:abertura-de-fissuras",
+      "tema": "durabilidade",
+      "titulo": "Limites de abertura de fissuras",
+      "resumo": "O concreto armado fissura em serviço, e isso é esperado. A norma não proíbe as fissuras: limita a abertura característica conforme a agressividade do ambiente, para proteger a armadura e manter a aparência aceitável.",
+      "status": "rascunho",
+      "pareto": {
+        "importancia": 4,
+        "frequencia": 3,
+        "dificuldade": 4,
+        "tempoEstudoMin": 20
+      },
+      "tags": [
+        "fissuração",
+        "w_k",
+        "ELS-W",
+        "serviço"
+      ],
+      "ondeSeAplica": [
+        "Verificação de vigas e lajes em serviço (ELS-W)",
+        "Escolha de bitola e espaçamento das barras",
+        "Reservatórios e estruturas em ambiente agressivo"
+      ],
+      "conexoes": [
+        {
+          "alvo": "nbr6118:classe-agressividade-ambiental",
+          "tipo": "depende-de"
+        },
+        {
+          "alvo": "nbr6118:cobrimento-nominal",
+          "tipo": "relacionado"
+        }
+      ],
+      "temQuiz": true,
+      "temSimulador": false
+    },
+    {
+      "id": "nbr6118:classe-agressividade-ambiental",
+      "tema": "durabilidade",
+      "titulo": "Classe de agressividade ambiental",
+      "resumo": "Classifica o ambiente em que a estrutura vai viver. É a primeira decisão do projeto de durabilidade: dela saem a qualidade mínima do concreto, o cobrimento das armaduras e o limite de abertura de fissuras.",
+      "status": "rascunho",
+      "pareto": {
+        "importancia": 5,
+        "frequencia": 5,
+        "dificuldade": 1,
+        "tempoEstudoMin": 10
+      },
+      "tags": [
+        "CAA",
+        "ambiente",
+        "corrosão",
+        "carbonatação",
+        "cloretos"
+      ],
+      "ondeSeAplica": [
+        "Início de todo projeto estrutural",
+        "Escolha do fck e da relação a/c",
+        "Definição do cobrimento",
+        "Verificação de fissuração (ELS-W)"
+      ],
+      "conexoes": [
+        {
+          "alvo": "nbr6118:qualidade-do-concreto",
+          "tipo": "influencia"
+        },
+        {
+          "alvo": "nbr6118:cobrimento-nominal",
+          "tipo": "influencia"
+        },
+        {
+          "alvo": "nbr6118:abertura-de-fissuras",
+          "tipo": "influencia"
+        }
+      ],
+      "temQuiz": true,
+      "temSimulador": true
+    },
+    {
+      "id": "nbr6118:cobrimento-nominal",
+      "tema": "durabilidade",
+      "titulo": "Cobrimento nominal",
+      "resumo": "Espessura de concreto entre a face da peça e a armadura mais externa, indicada no projeto. É o cobrimento mínimo somado à tolerância de execução, e cresce com a agressividade do ambiente.",
+      "status": "rascunho",
+      "pareto": {
+        "importancia": 5,
+        "frequencia": 5,
+        "dificuldade": 2,
+        "tempoEstudoMin": 15
+      },
+      "tags": [
+        "cobrimento",
+        "c_nom",
+        "espaçador",
+        "altura útil",
+        "estribo"
+      ],
+      "ondeSeAplica": [
+        "Detalhamento de lajes, vigas e pilares",
+        "Cálculo da altura útil (d)",
+        "Especificação de espaçadores",
+        "Elementos em contato com o solo"
+      ],
+      "conexoes": [
+        {
+          "alvo": "nbr6118:classe-agressividade-ambiental",
+          "tipo": "depende-de"
+        },
+        {
+          "alvo": "nbr6118:tolerancia-de-execucao",
+          "tipo": "depende-de"
+        },
+        {
+          "alvo": "nbr6118:qualidade-do-concreto",
+          "tipo": "relacionado"
+        },
+        {
+          "alvo": "nbr6118:abertura-de-fissuras",
+          "tipo": "relacionado"
+        }
+      ],
+      "temQuiz": true,
+      "temSimulador": true
+    },
+    {
+      "id": "nbr6118:qualidade-do-concreto",
+      "tema": "durabilidade",
+      "titulo": "Qualidade do concreto: relação a/c e classe",
+      "resumo": "Para cada classe de agressividade, a norma limita a relação água/cimento e exige uma classe mínima de resistência. O objetivo não é resistir mais carga: é obter um concreto menos poroso, que atrase a chegada dos agentes agressivos ao aço.",
+      "status": "rascunho",
+      "pareto": {
+        "importancia": 5,
+        "frequencia": 4,
+        "dificuldade": 2,
+        "tempoEstudoMin": 10
+      },
+      "tags": [
+        "a/c",
+        "fck",
+        "porosidade",
+        "permeabilidade",
+        "classe de resistência"
+      ],
+      "ondeSeAplica": [
+        "Especificação do concreto no projeto",
+        "Pedido de concreto à central",
+        "Controle tecnológico na obra"
+      ],
+      "conexoes": [
+        {
+          "alvo": "nbr6118:classe-agressividade-ambiental",
+          "tipo": "depende-de"
+        },
+        {
+          "alvo": "nbr6118:cobrimento-nominal",
+          "tipo": "relacionado"
+        },
+        {
+          "alvo": "nbr12655:requisitos-de-durabilidade",
+          "tipo": "relacionado"
+        }
+      ],
+      "temQuiz": true,
+      "temSimulador": true
+    },
+    {
+      "id": "nbr6118:tolerancia-de-execucao",
+      "tema": "durabilidade",
+      "titulo": "Tolerância de execução (Δc)",
+      "resumo": "Folga somada ao cobrimento mínimo para absorver os desvios da obra. Garante que, mesmo com a armadura um pouco fora de posição, o cobrimento mínimo ainda exista na peça pronta.",
+      "status": "rascunho",
+      "pareto": {
+        "importancia": 3,
+        "frequencia": 4,
+        "dificuldade": 1,
+        "tempoEstudoMin": 5
+      },
+      "tags": [
+        "Δc",
+        "delta c",
+        "tolerância",
+        "controle de qualidade",
+        "pré-moldado"
+      ],
+      "ondeSeAplica": [
+        "Definição do cobrimento nominal",
+        "Notas gerais dos desenhos",
+        "Elementos pré-moldados",
+        "Controle de qualidade da execução"
+      ],
+      "conexoes": [
+        {
+          "alvo": "nbr6118:cobrimento-nominal",
+          "tipo": "influencia"
+        }
+      ],
+      "temQuiz": true,
+      "temSimulador": true
+    }
+  ]
+}

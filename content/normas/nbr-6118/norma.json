@@ -1,0 +1,50 @@
+{
+  "id": "nbr6118",
+  "nome": "NBR 6118",
+  "titulo": "Projeto de estruturas de concreto",
+  "versao": "2023",
+  "temas": [
+    {
+      "id": "concreto",
+      "nome": "Concreto",
+      "matiz": 250,
+      "descricao": "Propriedades do material: resistência, módulo de elasticidade, retração e fluência."
+    },
+    {
+      "id": "armaduras",
+      "nome": "Armaduras",
+      "matiz": 45,
+      "descricao": "Aços para armadura passiva e ativa, aderência e comportamento conjunto com o concreto."
+    },
+    {
+      "id": "durabilidade",
+      "nome": "Durabilidade",
+      "matiz": 185,
+      "descricao": "Como o ambiente ataca a estrutura e o que o projeto faz para ela durar."
+    },
+    {
+      "id": "estados-limites",
+      "nome": "Estados Limites",
+      "matiz": 300,
+      "descricao": "Segurança (ELU) e desempenho em serviço (ELS): ações, combinações e coeficientes."
+    },
+    {
+      "id": "dimensionamento",
+      "nome": "Dimensionamento",
+      "matiz": 275,
+      "descricao": "Flexão, cisalhamento, torção e punção: da solicitação à área de aço."
+    },
+    {
+      "id": "detalhamento",
+      "nome": "Detalhamento",
+      "matiz": 75,
+      "descricao": "Ancoragem, emendas, espaçamentos e armaduras mínimas."
+    },
+    {
+      "id": "execucao",
+      "nome": "Execução",
+      "matiz": 150,
+      "descricao": "O que o projeto precisa garantir para que a obra saia como calculada."
+    }
+  ]
+}

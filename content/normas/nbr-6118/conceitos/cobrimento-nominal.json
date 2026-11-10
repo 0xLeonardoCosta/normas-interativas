@@ -1,0 +1,89 @@
+{
+  "id": "nbr6118:cobrimento-nominal",
+  "norma": "nbr6118",
+  "versao": "2023",
+  "tema": "durabilidade",
+  "titulo": "Cobrimento nominal",
+  "resumo": "Espessura de concreto entre a face da peça e a armadura mais externa, indicada no projeto. É o cobrimento mínimo somado à tolerância de execução, e cresce com a agressividade do ambiente.",
+  "oQueE": "O cobrimento é a camada de concreto que separa a armadura do ambiente. O valor que vai para o desenho é o **cobrimento nominal**:\n\n$$c_{nom} = c_{min} + \\Delta c$$\n\n- $c_{min}$ é o cobrimento mínimo, que precisa existir em qualquer ponto da peça pronta;\n- $\\Delta c$ é a tolerância de execução, uma folga para os desvios inevitáveis da obra.\n\nO cobrimento é medido até a face da **armadura mais externa**, que em vigas e pilares costuma ser o estribo, não a barra longitudinal.",
+  "porQueExiste": "O cobrimento é a **barreira física** entre o ambiente e o aço. A frente de carbonatação e os cloretos avançam da superfície para dentro, e o avanço desacelera com a profundidade. Em modelos simplificados de difusão, a profundidade atingida cresce com a raiz do tempo:\n\n$$x \\approx k\\sqrt{t}$$\n\nIsso significa que **dobrar o cobrimento multiplica por cerca de quatro** o tempo até o ataque alcançar a armadura. Poucos milímetros fazem diferença de décadas, e é por isso que ambientes mais agressivos pedem cobrimentos maiores.\n\nO cobrimento também garante que o concreto envolva a barra por completo, condição para a aderência funcionar e para o aço ficar protegido do fogo por mais tempo.\n\nHá um custo: quanto maior o cobrimento, menor a altura útil da seção. Por isso a norma fixa um valor para cada situação em vez de pedir simplesmente \"o máximo possível\".",
+  "ondeSeAplica": [
+    "Detalhamento de lajes, vigas e pilares",
+    "Cálculo da altura útil (d)",
+    "Especificação de espaçadores",
+    "Elementos em contato com o solo"
+  ],
+  "quandoUsar": "Depois de definir a classe de agressividade e antes de calcular a armadura, porque o cobrimento entra na altura útil.\n\nO valor depende do tipo de elemento: lajes, vigas e pilares e elementos em contato com o solo têm exigências diferentes para a mesma classe. A norma também relaciona o cobrimento ao diâmetro das barras e à dimensão máxima do agregado (itens 7.4.7.5 e 7.4.7.6).",
+  "errosComuns": [
+    "Medir o cobrimento até a barra longitudinal e esquecer o estribo, que fica mais perto da face.",
+    "Confundir cobrimento mínimo com nominal: o desenho e os espaçadores usam o nominal.",
+    "Calcular a altura útil com um cobrimento e detalhar com outro.",
+    "Usar o mesmo cobrimento em todos os elementos da obra, sem distinguir laje, viga, pilar e fundação.",
+    "Não especificar espaçadores: sem eles o cobrimento do desenho não acontece na fôrma."
+  ],
+  "exemplos": [
+    {
+      "titulo": "Como o cobrimento reduz a altura útil",
+      "texto": "Para uma camada de barras, a altura útil é $d = h - c_{nom} - \\phi_t - \\phi_l/2$.\n\nCom valores apenas ilustrativos ($h = 500$ mm, $c_{nom} = 30$ mm, $\\phi_t = 5$ mm e $\\phi_l = 16$ mm): $d = 500 - 30 - 5 - 8 = 457$ mm.\n\nSe o ambiente exigisse 20 mm a mais de cobrimento, $d$ cairia para 437 mm, cerca de 4% a menos de braço de alavanca para a mesma seção. Use o simulador abaixo para ver esse efeito no desenho."
+    }
+  ],
+  "fluxograma": "nbr6118:caa-cobrimento",
+  "simuladores": ["nbr6118:caa-cobrimento"],
+  "checklist": [
+    "Cobrimento definido para cada tipo de elemento, conforme a classe de agressividade.",
+    "Valor medido até a armadura mais externa (estribo).",
+    "Altura útil calculada com o mesmo cobrimento do detalhamento.",
+    "Cobrimento compatível com o diâmetro das barras e com o agregado.",
+    "Espaçadores e Δc indicados no projeto."
+  ],
+  "quiz": [
+    {
+      "pergunta": "Em uma viga com estribos, até onde se mede o cobrimento?",
+      "opcoes": [
+        "Até o eixo da barra longitudinal",
+        "Até a face da barra longitudinal",
+        "Até a face externa do estribo",
+        "Até o centro de gravidade da armadura"
+      ],
+      "correta": 2,
+      "explicacao": "O cobrimento protege a armadura mais externa. Em vigas e pilares, é o estribo que fica mais perto da face."
+    },
+    {
+      "pergunta": "Qual valor de cobrimento deve aparecer nos desenhos e orientar os espaçadores?",
+      "opcoes": [
+        "O cobrimento mínimo",
+        "O cobrimento nominal",
+        "A tolerância de execução",
+        "A média entre o mínimo e o nominal"
+      ],
+      "correta": 1,
+      "explicacao": "O nominal já inclui a tolerância de execução. Executando com o nominal, o mínimo fica garantido mesmo com os desvios da obra."
+    },
+    {
+      "pergunta": "Aumentar o cobrimento, mantendo a seção, tem qual efeito no dimensionamento à flexão?",
+      "opcoes": [
+        "Aumenta a altura útil",
+        "Não altera nada",
+        "Reduz a altura útil e tende a exigir mais armadura",
+        "Reduz o peso próprio"
+      ],
+      "correta": 2,
+      "explicacao": "A armadura fica mais longe da face tracionada e mais perto da linha neutra. Com braço de alavanca menor, é preciso mais aço para o mesmo momento."
+    }
+  ],
+  "referencias": [
+    { "item": "NBR 6118:2023, item 7.4.7", "descricao": "Cobrimento das armaduras: definições e exigências." },
+    { "item": "NBR 6118:2023, item 7.4.7.2", "descricao": "Cobrimento nominal como soma do cobrimento mínimo com a tolerância de execução." },
+    { "item": "NBR 6118:2023, Tabela 7.2", "descricao": "Cobrimento nominal por classe de agressividade e tipo de elemento." },
+    { "item": "NBR 6118:2023, itens 7.4.7.5 e 7.4.7.6", "descricao": "Relação do cobrimento com o diâmetro das barras e com a dimensão máxima do agregado." }
+  ],
+  "conexoes": [
+    { "alvo": "nbr6118:classe-agressividade-ambiental", "tipo": "depende-de" },
+    { "alvo": "nbr6118:tolerancia-de-execucao", "tipo": "depende-de" },
+    { "alvo": "nbr6118:qualidade-do-concreto", "tipo": "relacionado" },
+    { "alvo": "nbr6118:abertura-de-fissuras", "tipo": "relacionado" }
+  ],
+  "pareto": { "importancia": 5, "frequencia": 5, "dificuldade": 2, "tempoEstudoMin": 15 },
+  "tags": ["cobrimento", "c_nom", "espaçador", "altura útil", "estribo"],
+  "status": "rascunho"
+}

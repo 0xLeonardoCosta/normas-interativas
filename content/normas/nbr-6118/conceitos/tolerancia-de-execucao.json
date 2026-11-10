@@ -1,0 +1,62 @@
+{
+  "id": "nbr6118:tolerancia-de-execucao",
+  "norma": "nbr6118",
+  "versao": "2023",
+  "tema": "durabilidade",
+  "titulo": "Tolerância de execução (Δc)",
+  "resumo": "Folga somada ao cobrimento mínimo para absorver os desvios da obra. Garante que, mesmo com a armadura um pouco fora de posição, o cobrimento mínimo ainda exista na peça pronta.",
+  "oQueE": "A tolerância de execução, $\\Delta c$, é a parcela do cobrimento nominal reservada às imprecisões da construção:\n\n$$c_{nom} = c_{min} + \\Delta c$$\n\nA norma fixa um valor padrão para obras correntes e admite um valor reduzido quando há **controle rigoroso** de qualidade e de tolerâncias na execução, desde que isso esteja declarado no projeto.",
+  "porQueExiste": "Nenhuma obra reproduz o desenho com exatidão. A armadura se desloca quando é pisada, os espaçadores cedem ou ficam distantes demais, as fôrmas têm desvios e o lançamento do concreto empurra as barras.\n\nSe o projeto pedisse exatamente o cobrimento mínimo, qualquer desvio para o lado errado deixaria a barra com proteção insuficiente. O $\\Delta c$ desloca o alvo: a obra mira no nominal e os desvios normais ainda respeitam o mínimo.\n\nQuando a execução é mais controlada (como em pré-moldados produzidos em fábrica), os desvios são menores e a folga pode ser menor. Por isso a redução está condicionada ao controle rigoroso.",
+  "ondeSeAplica": [
+    "Definição do cobrimento nominal",
+    "Notas gerais dos desenhos",
+    "Elementos pré-moldados",
+    "Controle de qualidade da execução"
+  ],
+  "quandoUsar": "Sempre que definir um cobrimento. O valor padrão vale para a obra comum. A redução só deve ser usada quando o controle rigoroso existir de fato e estiver explicitado nos desenhos, porque a obra passa a ser cobrada por essa exigência.",
+  "errosComuns": [
+    "Adotar o Δc reduzido para ganhar altura útil sem que exista controle rigoroso na obra.",
+    "Reduzir o Δc sem registrar a exigência de controle nos desenhos.",
+    "Tratar o Δc como margem de segurança \"sobrando\": ele já está comprometido com os desvios de execução."
+  ],
+  "valores": [
+    { "rotulo": "Δc em obras correntes", "dado": "durabilidade/deltaC.padrao" },
+    { "rotulo": "Δc com controle rigoroso de execução", "dado": "durabilidade/deltaC.controleRigoroso" }
+  ],
+  "simuladores": ["nbr6118:caa-cobrimento"],
+  "quiz": [
+    {
+      "pergunta": "Para que serve a tolerância de execução Δc?",
+      "opcoes": [
+        "Para compensar a retração do concreto",
+        "Para absorver os desvios de posição da armadura na obra",
+        "Para aumentar a resistência ao fogo",
+        "Para compensar o desgaste da superfície ao longo do tempo"
+      ],
+      "correta": 1,
+      "explicacao": "O Δc existe para que o cobrimento mínimo seja respeitado mesmo quando a armadura não fica exatamente onde o desenho indica."
+    },
+    {
+      "pergunta": "Em que condição o projeto pode adotar o Δc reduzido?",
+      "opcoes": [
+        "Sempre que o projetista quiser aumentar a altura útil",
+        "Quando o concreto for de classe elevada",
+        "Quando houver controle rigoroso de execução, declarado no projeto",
+        "Apenas em lajes"
+      ],
+      "correta": 2,
+      "explicacao": "A redução é uma contrapartida: desvios menores, garantidos por controle, permitem uma folga menor. Sem o controle, a folga padrão continua necessária."
+    }
+  ],
+  "referencias": [
+    { "item": "NBR 6118:2023, item 7.4.7.2", "descricao": "Composição do cobrimento nominal." },
+    { "item": "NBR 6118:2023, item 7.4.7.3", "descricao": "Valor da tolerância de execução em obras correntes." },
+    { "item": "NBR 6118:2023, item 7.4.7.4", "descricao": "Redução da tolerância quando há controle rigoroso de execução." }
+  ],
+  "conexoes": [
+    { "alvo": "nbr6118:cobrimento-nominal", "tipo": "influencia" }
+  ],
+  "pareto": { "importancia": 3, "frequencia": 4, "dificuldade": 1, "tempoEstudoMin": 5 },
+  "tags": ["Δc", "delta c", "tolerância", "controle de qualidade", "pré-moldado"],
+  "status": "rascunho"
+}

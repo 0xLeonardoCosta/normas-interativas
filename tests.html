@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Testes · Normas Interativas</title>
+    <link rel="stylesheet" href="./css/tokens.css">
+    <link rel="stylesheet" href="./css/base.css">
+    <style>
+      main { width: min(46rem, 100% - 32px); margin: 48px auto; }
+      h1 { font-size: var(--t-lg); margin-bottom: 4px; }
+      #resumo { color: var(--texto-2); margin-bottom: 24px; }
+      li { list-style: none; padding: 8px 0; border-top: 1px solid var(--borda); font-size: var(--t-sm); }
+      ul { padding: 0; }
+      .ok::before { content: "✓ "; color: var(--ok); font-weight: 600; }
+      .falha::before { content: "✗ "; color: var(--erro); font-weight: 600; }
+      .aviso::before { content: "! "; color: var(--alerta); font-weight: 600; }
+      pre { margin: 6px 0 0 18px; white-space: pre-wrap; color: var(--erro); font-family: var(--fonte-mono); }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Testes</h1>
+      <p id="resumo" role="status">Rodando…</p>
+      <ul id="lista"></ul>
+    </main>
+    <script type="module">
+      import { rodar } from './tests/harness.js';
+      import suiteCalculo from './tests/calc.test.js';
+      import suiteConteudo from './tests/conteudo.test.js';
+
+      const lerJSON = async (caminho) => {
+        const r = await fetch(new URL(caminho, document.baseURI), { cache: 'no-store' });
+        if (!r.ok) throw new Error(`${r.status} ${caminho}`);
+        return r.json();
+      };
+      // O navegador não lista pastas: os slugs vêm do índice. Conceito fora do índice é pego por `node tools/test.js`.
+      const ambiente = {
+        lerJSON,
+        listarConceitos: async (pasta) =>
+          (await lerJSON(`content/normas/${pasta}/index.json`)).conceitos.map((c) => c.id.split(':')[1]).sort(),
+      };
+
+      const { resultados, avisos, falhas } = await rodar([suiteCalculo, suiteConteudo], ambiente);
+      const lista = document.getElementById('lista');
+      const item = (classe, texto, detalhe) => {
+        const li = document.createElement('li');
+        li.className = classe;
+        li.append(texto);
+        if (detalhe) li.append(Object.assign(document.createElement('pre'), { textContent: detalhe }));
+        lista.append(li);
+      };
+      resultados.forEach((r) => item(r.ok ? 'ok' : 'falha', r.nome, r.erro));
+      avisos.forEach((a) => item('aviso', a));
+      document.getElementById('resumo').textContent =
+        `${resultados.length - falhas} de ${resultados.length} testes passaram` + (avisos.length ? `, ${avisos.length} aviso(s).` : '.');
+      window.__testes = { resultados, avisos, falhas };
+    </script>
+  </body>
+</html>

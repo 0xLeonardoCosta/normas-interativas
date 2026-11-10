@@ -1,0 +1,10 @@
+{
+  "name": "normas-interativas",
+  "private": true,
+  "type": "module",
+  "description": "Biblioteca interativa de normas técnicas. Site estático, sem etapa de build e sem dependências.",
+  "scripts": {
+    "indice": "node tools/build-index.js",
+    "test": "node tools/test.js"
+  }
+}
