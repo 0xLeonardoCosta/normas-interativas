@@ -1,0 +1,49 @@
+{
+  "id": "ancoragem",
+  "observacao": "Fonte única dos valores normativos de aderência e ancoragem de armaduras passivas. Todo bloco com pendenteValidacao=true ainda não foi conferido com a norma pelo responsável técnico. Ao validar, troque para false e atualize docs/TODO-NORMA.md.",
+
+  "eta1": {
+    "referencia": "NBR 6118:2023, item 9.3.2.1",
+    "pendenteValidacao": true,
+    "lisa": { "nome": "Lisa", "valor": 1.0 },
+    "entalhada": { "nome": "Entalhada", "valor": 1.4 },
+    "nervurada": { "nome": "Nervurada", "valor": 2.25 }
+  },
+
+  "eta2": {
+    "referencia": "NBR 6118:2023, item 9.3.2.1",
+    "pendenteValidacao": true,
+    "boa": { "nome": "Boa aderência", "valor": 1.0 },
+    "ma": { "nome": "Má aderência", "valor": 0.7 }
+  },
+
+  "eta3": {
+    "referencia": "NBR 6118:2023, item 9.3.2.1",
+    "pendenteValidacao": true,
+    "observacao": "Vale 1 abaixo do diâmetro-limite; a partir dele, (base − φ) / divisor, com φ em mm.",
+    "diametroLimite": { "valor": 32, "unidade": "mm" },
+    "base": 132,
+    "divisor": 100
+  },
+
+  "comprimentoBasico": {
+    "referencia": "NBR 6118:2023, item 9.4.2.4",
+    "pendenteValidacao": true,
+    "minimoEmDiametros": { "valor": 25 }
+  },
+
+  "alfaGancho": {
+    "referencia": "NBR 6118:2023, item 9.4.2.5",
+    "pendenteValidacao": true,
+    "semGancho": { "valor": 1.0 },
+    "comGancho": { "valor": 0.7 }
+  },
+
+  "comprimentoMinimo": {
+    "referencia": "NBR 6118:2023, item 9.4.2.5",
+    "pendenteValidacao": true,
+    "fracaoDoBasico": { "valor": 0.3 },
+    "emDiametros": { "valor": 10 },
+    "absoluto": { "valor": 100, "unidade": "mm" }
+  }
+}

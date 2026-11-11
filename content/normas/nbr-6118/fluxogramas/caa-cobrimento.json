@@ -1,0 +1,59 @@
+{
+  "id": "nbr6118:caa-cobrimento",
+  "titulo": "Do ambiente ao cobrimento",
+  "descricao": "Responda às perguntas para chegar à classe de agressividade e às exigências de durabilidade do elemento.",
+  "inicio": "quimico",
+  "nos": {
+    "quimico": {
+      "tipo": "pergunta",
+      "texto": "A estrutura fica exposta a agentes químicos industriais agressivos ou a respingos de maré?",
+      "ajuda": "Tanques e pisos de indústrias químicas, estruturas na faixa de variação e respingo da maré.",
+      "opcoes": [
+        { "rotulo": "Sim", "define": { "caa": "IV" }, "proximo": "elemento" },
+        { "rotulo": "Não", "proximo": "marinho" }
+      ]
+    },
+    "marinho": {
+      "tipo": "pergunta",
+      "texto": "O ambiente é marinho ou industrial?",
+      "ajuda": "Obras na orla, sujeitas à névoa salina, ou em zonas industriais.",
+      "opcoes": [
+        { "rotulo": "Sim", "define": { "caa": "III" }, "proximo": "elemento" },
+        { "rotulo": "Não", "proximo": "urbano" }
+      ]
+    },
+    "urbano": {
+      "tipo": "pergunta",
+      "texto": "O ambiente é urbano?",
+      "ajuda": "Cidades, com poluição atmosférica típica e ciclos de molhagem pela chuva.",
+      "opcoes": [
+        { "rotulo": "Sim", "define": { "caa": "II" }, "proximo": "elemento" },
+        { "rotulo": "Não, é rural ou a estrutura fica submersa", "define": { "caa": "I" }, "proximo": "elemento" }
+      ]
+    },
+    "elemento": {
+      "tipo": "pergunta",
+      "texto": "Qual é o tipo de elemento?",
+      "ajuda": "O cobrimento exigido muda conforme o elemento, para a mesma classe de agressividade.",
+      "opcoes": [
+        { "rotulo": "Laje", "define": { "elemento": "laje" }, "proximo": "controle" },
+        { "rotulo": "Viga ou pilar", "define": { "elemento": "viga-pilar" }, "proximo": "controle" },
+        { "rotulo": "Em contato com o solo", "define": { "elemento": "contato-solo" }, "proximo": "controle" }
+      ]
+    },
+    "controle": {
+      "tipo": "pergunta",
+      "texto": "A execução terá controle rigoroso de qualidade, declarado no projeto?",
+      "ajuda": "Só responda sim se as tolerâncias de execução forem de fato controladas e isso constar nos desenhos.",
+      "opcoes": [
+        { "rotulo": "Não, obra corrente", "define": { "controleRigoroso": false }, "proximo": "resultado" },
+        { "rotulo": "Sim", "define": { "controleRigoroso": true }, "proximo": "resultado" }
+      ]
+    },
+    "resultado": {
+      "tipo": "resultado",
+      "texto": "Exigências de durabilidade para este elemento",
+      "resolvedor": "nbr6118:requisitos-durabilidade"
+    }
+  }
+}

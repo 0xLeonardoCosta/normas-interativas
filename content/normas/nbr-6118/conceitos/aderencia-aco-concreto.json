@@ -1,0 +1,75 @@
+{
+  "id": "nbr6118:aderencia-aco-concreto",
+  "norma": "nbr6118",
+  "versao": "2023",
+  "tema": "armaduras",
+  "titulo": "Aderência entre aço e concreto",
+  "resumo": "É a aderência que faz aço e concreto trabalharem juntos. A norma a traduz em uma resistência de aderência de cálculo, que depende da superfície da barra, da posição dela na concretagem, do diâmetro e da resistência à tração do concreto.",
+  "oQueE": "Aderência é a capacidade de transferir força entre a barra e o concreto que a envolve, sem que a barra escorregue. A norma a representa por uma tensão resistente distribuída na superfície da barra, a **resistência de aderência de cálculo**:\n\n$$f_{bd} = \\eta_1 \\, \\eta_2 \\, \\eta_3 \\, f_{ctd}$$\n\nCada fator responde a uma pergunta:\n\n- $\\eta_1$: como é a **superfície** da barra (lisa, entalhada ou nervurada)?\n- $\\eta_2$: a barra está em zona de **boa ou má aderência** na concretagem?\n- $\\eta_3$: a barra é **muito grossa**?\n- $f_{ctd}$: quanto o concreto resiste à **tração**?",
+  "porQueExiste": "Sem aderência, o aço seria apenas um tirante solto dentro da peça. É ela que obriga as duas partes a se deformarem juntas, e é por ela que a força entra e sai das barras.\n\nNas barras nervuradas, a maior parte da aderência é **mecânica**: as nervuras se apoiam no concreto como dentes. Esse apoio empurra o concreto para fora, criando tração ao redor da barra. Quando essa tração vence o concreto, ele fende e a barra se solta. Por isso a aderência é proporcional à resistência do concreto à **tração**, e não à compressão.\n\nA posição na concretagem importa porque o concreto fresco assenta: água e ar sobem e ficam presos sob as barras horizontais da parte de cima das peças altas, deixando ali um concreto mais poroso. Barras verticais, ou próximas do fundo da fôrma, ficam envolvidas por concreto mais compacto.\n\nBarras muito grossas concentram muita força em pouca superfície e fendem o concreto com mais facilidade, daí a redução para diâmetros grandes.",
+  "ondeSeAplica": [
+    "Comprimento de ancoragem das barras",
+    "Emendas por traspasse",
+    "Decalagem e interrupção da armadura longitudinal",
+    "Controle da fissuração"
+  ],
+  "quandoUsar": "Sempre que for preciso saber em quanto comprimento uma barra consegue transferir sua força ao concreto: ancoragens em apoios, cortes de barras ao longo da viga e emendas. Identifique primeiro a zona de aderência de cada barra; os critérios geométricos estão no item que trata da posição da barra durante a concretagem.",
+  "errosComuns": [
+    "Considerar boa aderência para as barras superiores de vigas altas e de lajes espessas sem conferir os critérios da norma.",
+    "Esquecer que a zona de aderência depende da posição da barra na concretagem, não na estrutura pronta (atenção a peças pré-moldadas concretadas em outra posição).",
+    "Usar a resistência à compressão no lugar da resistência à tração de cálculo.",
+    "Supor que barras lisas e nervuradas ancoram da mesma forma."
+  ],
+  "valores": [
+    { "rotulo": "η1 para barras lisas", "dado": "ancoragem/eta1.lisa" },
+    { "rotulo": "η1 para barras entalhadas", "dado": "ancoragem/eta1.entalhada" },
+    { "rotulo": "η1 para barras nervuradas", "dado": "ancoragem/eta1.nervurada" },
+    { "rotulo": "η2 em boa aderência", "dado": "ancoragem/eta2.boa" },
+    { "rotulo": "η2 em má aderência", "dado": "ancoragem/eta2.ma" },
+    { "rotulo": "Diâmetro a partir do qual η3 reduz a aderência", "dado": "ancoragem/eta3.diametroLimite" }
+  ],
+  "simuladores": ["nbr6118:ancoragem"],
+  "checklist": [
+    "A zona de aderência (boa ou má) foi identificada para cada posição de barra.",
+    "O coeficiente de superfície corresponde ao aço especificado.",
+    "A resistência à tração de cálculo usa o valor característico inferior.",
+    "Barras de grande diâmetro receberam a redução correspondente."
+  ],
+  "quiz": [
+    {
+      "pergunta": "Por que a resistência de aderência depende da resistência à tração do concreto?",
+      "opcoes": [
+        "Porque a barra está tracionada",
+        "Porque as nervuras empurram o concreto para fora, e a ruptura acontece quando ele fende por tração",
+        "Porque a compressão do concreto não é conhecida no projeto",
+        "Porque a norma simplifica todas as verificações usando a tração"
+      ],
+      "correta": 1,
+      "explicacao": "O apoio das nervuras gera tração em anel no concreto ao redor da barra. O limite da aderência é o fendilhamento desse concreto."
+    },
+    {
+      "pergunta": "Qual destas barras tende a estar em zona de má aderência?",
+      "opcoes": [
+        "Barra vertical de um pilar",
+        "Barra inferior de uma viga",
+        "Barra horizontal no topo de uma viga alta",
+        "Estribo de uma viga baixa"
+      ],
+      "correta": 2,
+      "explicacao": "No topo de peças altas, a água e o ar que sobem durante o adensamento ficam presos sob a barra horizontal e enfraquecem o concreto ao redor."
+    }
+  ],
+  "referencias": [
+    { "item": "NBR 6118:2023, item 9.3.1", "descricao": "Posição da barra durante a concretagem: zonas de boa e de má aderência." },
+    { "item": "NBR 6118:2023, item 9.3.2.1", "descricao": "Resistência de aderência de cálculo de armaduras passivas." },
+    { "item": "NBR 6118:2023, item 8.3", "descricao": "Aço de armadura passiva: categorias e conformação superficial." }
+  ],
+  "conexoes": [
+    { "alvo": "nbr6118:propriedades-do-concreto", "tipo": "depende-de" },
+    { "alvo": "nbr6118:comprimento-de-ancoragem", "tipo": "influencia" },
+    { "alvo": "nbr6118:abertura-de-fissuras", "tipo": "relacionado" }
+  ],
+  "pareto": { "importancia": 4, "frequencia": 4, "dificuldade": 3, "tempoEstudoMin": 15 },
+  "tags": ["aderência", "fbd", "eta", "nervura", "boa aderência", "má aderência", "CA-50"],
+  "status": "rascunho"
+}

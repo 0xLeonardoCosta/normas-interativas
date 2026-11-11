@@ -1,0 +1,80 @@
+{
+  "id": "nbr6118:abertura-de-fissuras",
+  "norma": "nbr6118",
+  "versao": "2023",
+  "tema": "durabilidade",
+  "titulo": "Limites de abertura de fissuras",
+  "resumo": "O concreto armado fissura em serviço, e isso é esperado. A norma não proíbe as fissuras: limita a abertura característica conforme a agressividade do ambiente, para proteger a armadura e manter a aparência aceitável.",
+  "oQueE": "É o valor máximo admitido para a **abertura característica de fissuras**, $w_k$, na superfície do concreto, sob as cargas de serviço.\n\nO limite depende da classe de agressividade ambiental e do tipo de concreto estrutural (armado ou protendido). A conferência é feita no estado-limite de serviço de abertura de fissuras (ELS-W).",
+  "porQueExiste": "O concreto resiste pouco à tração. Em uma viga fletida, a região tracionada fissura muito antes de o aço atingir tensões relevantes: a fissura é justamente o momento em que **a armadura assume a tração**. Concreto armado sem fissura é exceção, não regra.\n\nO problema não é existir fissura, é ela ser larga demais. Cada fissura é um atalho que leva umidade, CO₂ e cloretos direto à armadura, sem atravessar o cobrimento íntegro. Quanto mais larga e quanto mais agressivo o ambiente, mais rápido o ataque.\n\nPor isso o limite fica mais apertado nas classes de agressividade mais altas. Há também um motivo de uso: fissuras muito visíveis causam desconforto e desconfiança nos usuários, mesmo quando não oferecem risco.",
+  "ondeSeAplica": [
+    "Verificação de vigas e lajes em serviço (ELS-W)",
+    "Escolha de bitola e espaçamento das barras",
+    "Reservatórios e estruturas em ambiente agressivo"
+  ],
+  "quandoUsar": "Depois do dimensionamento no estado-limite último, na verificação em serviço. A abertura estimada depende da tensão no aço, do diâmetro das barras e da taxa de armadura na região tracionada.\n\nQuando a abertura passa do limite, as correções usuais são trocar poucas barras grossas por mais barras finas, reduzir o espaçamento ou aumentar a área de aço para baixar a tensão em serviço.",
+  "errosComuns": [
+    "Interpretar qualquer fissura como defeito estrutural.",
+    "Verificar apenas o estado-limite último e não conferir a fissuração em serviço.",
+    "Concentrar a armadura em poucas barras de grande diâmetro, o que tende a produzir fissuras mais espaçadas e mais largas.",
+    "Usar a combinação de ações do estado-limite último na verificação de serviço."
+  ],
+  "valores": [
+    { "rotulo": "CAA I: abertura máxima w_k (concreto armado)", "dado": "durabilidade/aberturaFissuras.armado.I", "unidade": "mm" },
+    { "rotulo": "CAA II: abertura máxima w_k (concreto armado)", "dado": "durabilidade/aberturaFissuras.armado.II", "unidade": "mm" },
+    { "rotulo": "CAA III: abertura máxima w_k (concreto armado)", "dado": "durabilidade/aberturaFissuras.armado.III", "unidade": "mm" },
+    { "rotulo": "CAA IV: abertura máxima w_k (concreto armado)", "dado": "durabilidade/aberturaFissuras.armado.IV", "unidade": "mm" }
+  ],
+  "checklist": [
+    "Limite de abertura definido conforme a classe de agressividade.",
+    "Verificação feita com a combinação de serviço indicada pela norma.",
+    "Bitolas e espaçamentos escolhidos pensando também na fissuração."
+  ],
+  "quiz": [
+    {
+      "pergunta": "Uma viga de concreto armado apresenta fissuras finas na região tracionada sob carga de serviço. Isso indica o quê?",
+      "opcoes": [
+        "Erro de projeto",
+        "Comportamento esperado: a armadura passa a resistir à tração depois que o concreto fissura",
+        "Falta de cura do concreto",
+        "Ruptura iminente"
+      ],
+      "correta": 1,
+      "explicacao": "A fissuração controlada faz parte do funcionamento do concreto armado. O que a norma limita é a abertura, não a existência."
+    },
+    {
+      "pergunta": "Por que o limite de abertura é mais rigoroso em ambientes mais agressivos?",
+      "opcoes": [
+        "Porque as cargas são maiores nesses ambientes",
+        "Porque a fissura é um caminho direto dos agentes agressivos até a armadura",
+        "Porque o concreto é mais fraco nesses ambientes",
+        "Por razões exclusivamente estéticas"
+      ],
+      "correta": 1,
+      "explicacao": "A fissura contorna a proteção do cobrimento. Quanto mais agressivo o meio, menor a abertura tolerável."
+    },
+    {
+      "pergunta": "Mantida a área de aço, qual medida tende a reduzir a abertura das fissuras?",
+      "opcoes": [
+        "Usar menos barras, de diâmetro maior",
+        "Usar mais barras, de diâmetro menor e mais próximas",
+        "Aumentar o cobrimento",
+        "Reduzir o fck"
+      ],
+      "correta": 1,
+      "explicacao": "Mais barras finas distribuem melhor a aderência: surgem mais fissuras, porém mais próximas e mais fechadas."
+    }
+  ],
+  "referencias": [
+    { "item": "NBR 6118:2023, item 13.4", "descricao": "Controle da fissuração e proteção das armaduras." },
+    { "item": "NBR 6118:2023, item 13.4.2 e Tabela 13.4", "descricao": "Limites de abertura de fissuras por classe de agressividade e tipo de concreto." },
+    { "item": "NBR 6118:2023, item 17.3.3", "descricao": "Verificação do estado-limite de abertura de fissuras." }
+  ],
+  "conexoes": [
+    { "alvo": "nbr6118:classe-agressividade-ambiental", "tipo": "depende-de" },
+    { "alvo": "nbr6118:cobrimento-nominal", "tipo": "relacionado" }
+  ],
+  "pareto": { "importancia": 4, "frequencia": 3, "dificuldade": 4, "tempoEstudoMin": 20 },
+  "tags": ["fissuração", "w_k", "ELS-W", "serviço"],
+  "status": "rascunho"
+}

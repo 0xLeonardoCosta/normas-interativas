@@ -1,0 +1,66 @@
+{
+  "id": "durabilidade",
+  "observacao": "Fonte única dos valores normativos de durabilidade. Todo bloco com pendenteValidacao=true ainda não foi conferido com a norma pelo responsável técnico. Ao validar, troque para false e atualize docs/TODO-NORMA.md.",
+
+  "classesAgressividade": {
+    "referencia": "NBR 6118:2023, Tabela 6.1",
+    "pendenteValidacao": true,
+    "itens": [
+      { "id": "I", "agressividade": "Fraca", "risco": "Insignificante", "ambientes": ["Rural", "Submersa"] },
+      { "id": "II", "agressividade": "Moderada", "risco": "Pequeno", "ambientes": ["Urbana"] },
+      { "id": "III", "agressividade": "Forte", "risco": "Grande", "ambientes": ["Marinha", "Industrial"] },
+      { "id": "IV", "agressividade": "Muito forte", "risco": "Elevado", "ambientes": ["Industrial com agentes químicos agressivos", "Respingos de maré"] }
+    ]
+  },
+
+  "elementos": [
+    { "id": "laje", "nome": "Laje" },
+    { "id": "viga-pilar", "nome": "Viga ou pilar" },
+    { "id": "contato-solo", "nome": "Em contato com o solo" }
+  ],
+
+  "qualidadeConcreto": {
+    "referencia": "NBR 6118:2023, Tabela 7.1",
+    "pendenteValidacao": true,
+    "armado": {
+      "I": { "relacaoAcMax": 0.65, "classeMin": 20 },
+      "II": { "relacaoAcMax": 0.60, "classeMin": 25 },
+      "III": { "relacaoAcMax": 0.55, "classeMin": 30 },
+      "IV": { "relacaoAcMax": 0.45, "classeMin": 40 }
+    }
+  },
+
+  "cobrimentoNominal": {
+    "referencia": "NBR 6118:2023, Tabela 7.2",
+    "pendenteValidacao": true,
+    "unidade": "mm",
+    "deltaCDaTabela": 10,
+    "armado": {
+      "laje": { "I": 20, "II": 25, "III": 35, "IV": 45 },
+      "viga-pilar": { "I": 25, "II": 30, "III": 40, "IV": 50 },
+      "contato-solo": { "I": 30, "II": 30, "III": 40, "IV": 50 }
+    }
+  },
+
+  "deltaC": {
+    "padrao": {
+      "valor": 10,
+      "unidade": "mm",
+      "referencia": "NBR 6118:2023, item 7.4.7.3",
+      "pendenteValidacao": true
+    },
+    "controleRigoroso": {
+      "valor": 5,
+      "unidade": "mm",
+      "referencia": "NBR 6118:2023, item 7.4.7.4",
+      "pendenteValidacao": true
+    }
+  },
+
+  "aberturaFissuras": {
+    "referencia": "NBR 6118:2023, Tabela 13.4",
+    "pendenteValidacao": true,
+    "unidade": "mm",
+    "armado": { "I": 0.4, "II": 0.3, "III": 0.3, "IV": 0.2 }
+  }
+}

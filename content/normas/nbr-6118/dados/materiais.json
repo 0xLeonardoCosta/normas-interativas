@@ -1,0 +1,56 @@
+{
+  "id": "materiais",
+  "observacao": "Fonte única dos valores normativos de propriedades do concreto e do aço. Todo bloco com pendenteValidacao=true ainda não foi conferido com a norma pelo responsável técnico. Ao validar, troque para false e atualize docs/TODO-NORMA.md.",
+
+  "classes": {
+    "referencia": "NBR 6118:2023, item 8.2.1",
+    "pendenteValidacao": true,
+    "unidade": "MPa",
+    "fckMin": 20,
+    "limiteGrupoI": 50,
+    "fckMax": 90
+  },
+
+  "resistenciaTracao": {
+    "referencia": "NBR 6118:2023, item 8.2.5",
+    "pendenteValidacao": true,
+    "grupoI": { "coeficiente": 0.3, "expoente": [2, 3] },
+    "grupoII": { "coeficiente": 2.12, "fatorFck": 0.11 },
+    "fatorInferior": { "valor": 0.7 },
+    "fatorSuperior": { "valor": 1.3 }
+  },
+
+  "moduloElasticidade": {
+    "referencia": "NBR 6118:2023, item 8.2.8",
+    "pendenteValidacao": true,
+    "unidade": "MPa",
+    "grupoI": { "coeficiente": 5600 },
+    "grupoII": { "coeficiente": 21500, "divisorFck": 10, "parcela": 1.25, "expoente": [1, 3] },
+    "alfaE": {
+      "basalto": { "nome": "Basalto ou diabásio", "valor": 1.2 },
+      "granito": { "nome": "Granito ou gnaisse", "valor": 1.0 },
+      "calcario": { "nome": "Calcário", "valor": 0.9 },
+      "arenito": { "nome": "Arenito", "valor": 0.7 }
+    },
+    "alfaI": { "base": 0.8, "inclinacao": 0.2, "fckReferencia": 80, "maximo": 1.0 }
+  },
+
+  "coeficientesPonderacao": {
+    "referencia": "NBR 6118:2023, Tabela 12.1",
+    "pendenteValidacao": true,
+    "observacao": "Combinações normais, estado-limite último.",
+    "gamaC": { "valor": 1.4 },
+    "gamaS": { "valor": 1.15 }
+  },
+
+  "acos": {
+    "referencia": "NBR 6118:2023, item 8.3 e Tabela 8.3",
+    "pendenteValidacao": true,
+    "unidade": "MPa",
+    "itens": [
+      { "id": "CA-25", "fyk": 250, "superficie": "lisa" },
+      { "id": "CA-50", "fyk": 500, "superficie": "nervurada" },
+      { "id": "CA-60", "fyk": 600, "superficie": "entalhada" }
+    ]
+  }
+}

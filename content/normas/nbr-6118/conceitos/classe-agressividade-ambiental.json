@@ -1,0 +1,79 @@
+{
+  "id": "nbr6118:classe-agressividade-ambiental",
+  "norma": "nbr6118",
+  "versao": "2023",
+  "tema": "durabilidade",
+  "titulo": "Classe de agressividade ambiental",
+  "resumo": "Classifica o ambiente em que a estrutura vai viver. É a primeira decisão do projeto de durabilidade: dela saem a qualidade mínima do concreto, o cobrimento das armaduras e o limite de abertura de fissuras.",
+  "oQueE": "A classe de agressividade ambiental (CAA) é uma nota de **I a IV** que o projetista dá ao ambiente onde a estrutura ficará exposta, da agressividade fraca à muito forte.\n\nEla descreve as ações **físicas e químicas** do meio sobre o concreto e o aço. Não tem relação com as cargas: uma laje pouco carregada à beira-mar pode exigir mais cuidado do que uma viga muito solicitada em ambiente seco.\n\nA classificação parte do tipo de ambiente (rural, urbano, marinho, industrial) e pode ser refinada pelo microclima de cada região da obra.",
+  "porQueExiste": "O aço dentro do concreto não enferruja porque o concreto é fortemente alcalino: nesse meio forma-se sobre a barra uma película protetora (passivação). Dois mecanismos destroem essa proteção:\n\n- **Carbonatação:** o CO₂ do ar reage com a pasta de cimento e reduz o pH. A frente carbonatada avança da superfície para dentro; quando alcança a armadura, a película se perde.\n- **Cloretos:** os sais do ar marinho ou de produtos químicos penetram pelos poros e rompem a película em pontos localizados, mesmo com pH alto.\n\nA velocidade desses ataques depende do ambiente: umidade, concentração de CO₂, presença de sais e de agentes químicos. Quanto mais agressivo o meio, mais forte precisa ser a barreira (concreto menos poroso e cobrimento maior).\n\nClassificar o ambiente logo no início transforma uma preocupação vaga com \"durar bastante\" em um dado de entrada objetivo do projeto.",
+  "ondeSeAplica": [
+    "Início de todo projeto estrutural",
+    "Escolha do fck e da relação a/c",
+    "Definição do cobrimento",
+    "Verificação de fissuração (ELS-W)"
+  ],
+  "quandoUsar": "Antes de qualquer dimensionamento. A classe condiciona o fck mínimo e o cobrimento, e os dois mudam a seção: decidir depois obriga a refazer o cálculo.\n\nAvalie por região da estrutura, não só pela obra como um todo. Um mesmo edifício pode ter fachadas expostas, garagens úmidas, reservatórios e ambientes internos secos, cada um com sua condição.",
+  "errosComuns": [
+    "Adotar uma única classe para a obra inteira sem olhar os microclimas (garagem, reservatório, fachada, área interna).",
+    "Tratar obra em cidade litorânea como ambiente urbano comum, ignorando a névoa salina.",
+    "Abrandar a classe por conta própria: os casos em que a norma admite uma classe mais branda estão nas notas da tabela e precisam ser conferidos um a um.",
+    "Definir a classe depois de dimensionar, quando fck e cobrimento já foram \"escolhidos\" por hábito."
+  ],
+  "fluxograma": "nbr6118:caa-cobrimento",
+  "simuladores": ["nbr6118:caa-cobrimento"],
+  "checklist": [
+    "Identifiquei o macroclima da obra (rural, urbano, marinho ou industrial).",
+    "Verifiquei regiões com microclima diferente do restante da estrutura.",
+    "Registrei a classe adotada nos documentos do projeto.",
+    "Usei a classe para definir concreto, cobrimento e limite de fissuração."
+  ],
+  "quiz": [
+    {
+      "pergunta": "A classe de agressividade ambiental depende principalmente de quê?",
+      "opcoes": [
+        "Da intensidade das cargas que atuam na estrutura",
+        "Das condições físicas e químicas do ambiente de exposição",
+        "Da resistência característica do concreto escolhido",
+        "Do tipo de aço das armaduras"
+      ],
+      "correta": 1,
+      "explicacao": "A CAA descreve o meio, não a estrutura. Cargas, fck e aço são decisões de projeto; algumas delas são consequência da classe, não a causa."
+    },
+    {
+      "pergunta": "Por que o aço mergulhado em concreto são e íntegro não sofre corrosão?",
+      "opcoes": [
+        "Porque o concreto é totalmente impermeável",
+        "Porque o concreto é isolante elétrico",
+        "Porque a alta alcalinidade do concreto forma uma película protetora sobre a barra",
+        "Porque o aço para concreto armado é inoxidável"
+      ],
+      "correta": 2,
+      "explicacao": "A proteção é química: o pH elevado mantém o aço passivado. Carbonatação e cloretos são perigosos justamente porque destroem essa película."
+    },
+    {
+      "pergunta": "Um edifício residencial tem garagem no subsolo, fachadas expostas à chuva e salas internas secas. Como classificar?",
+      "opcoes": [
+        "Uma classe única, a mais branda, para simplificar",
+        "Uma classe única, definida pela área construída",
+        "Avaliando cada região: o microclima pode levar a exigências diferentes na mesma obra",
+        "Não é preciso classificar edifícios residenciais"
+      ],
+      "correta": 2,
+      "explicacao": "A classificação parte do macroclima, mas o microclima de cada região pode alterar as exigências. Tratar tudo como uma única condição ou é inseguro ou é antieconômico."
+    }
+  ],
+  "referencias": [
+    { "item": "NBR 6118:2023, item 6.4", "descricao": "Agressividade do ambiente: conceito e critérios de classificação." },
+    { "item": "NBR 6118:2023, Tabela 6.1", "descricao": "Classes de agressividade ambiental, com suas notas sobre microclimas." },
+    { "item": "NBR 6118:2023, item 6.3", "descricao": "Mecanismos de envelhecimento e deterioração do concreto e da armadura." }
+  ],
+  "conexoes": [
+    { "alvo": "nbr6118:qualidade-do-concreto", "tipo": "influencia" },
+    { "alvo": "nbr6118:cobrimento-nominal", "tipo": "influencia" },
+    { "alvo": "nbr6118:abertura-de-fissuras", "tipo": "influencia" }
+  ],
+  "pareto": { "importancia": 5, "frequencia": 5, "dificuldade": 1, "tempoEstudoMin": 10 },
+  "tags": ["CAA", "ambiente", "corrosão", "carbonatação", "cloretos"],
+  "status": "rascunho"
+}

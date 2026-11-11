@@ -1,0 +1,75 @@
+{
+  "id": "nbr6118:qualidade-do-concreto",
+  "norma": "nbr6118",
+  "versao": "2023",
+  "tema": "durabilidade",
+  "titulo": "Qualidade do concreto: relação a/c e classe",
+  "resumo": "Para cada classe de agressividade, a norma limita a relação água/cimento e exige uma classe mínima de resistência. O objetivo não é resistir mais carga: é obter um concreto menos poroso, que atrase a chegada dos agentes agressivos ao aço.",
+  "oQueE": "É o par de exigências que garante um concreto **pouco permeável** na camada que protege a armadura:\n\n- um **teto** para a relação água/cimento (a/c), em massa;\n- um **piso** para a classe de resistência (C20, C25, C30...).\n\nQuanto mais agressivo o ambiente, menor a relação a/c permitida e maior a classe mínima exigida.",
+  "porQueExiste": "O cimento precisa de pouca água para hidratar. O que se coloca além disso serve para dar trabalhabilidade e, ao evaporar, deixa **poros capilares interligados**. São esses poros o caminho do CO₂, da água e dos cloretos até a armadura.\n\nReduzir a relação a/c diminui o volume e a conexão desses poros. O concreto fica mais compacto, e a frente de carbonatação e os cloretos avançam mais devagar.\n\nA classe de resistência entra como um **indicador verificável**: a/c baixo e resistência alta andam juntos, e resistência é o que se controla com facilidade na obra, pelos corpos de prova. Por isso um elemento pode precisar de C30 pela durabilidade mesmo que C20 bastasse para as cargas.",
+  "ondeSeAplica": [
+    "Especificação do concreto no projeto",
+    "Pedido de concreto à central",
+    "Controle tecnológico na obra"
+  ],
+  "quandoUsar": "Logo depois de definir a classe de agressividade e antes de dimensionar. A classe mínima de concreto é um piso: o cálculo pode pedir mais, nunca menos.\n\nNa especificação, informe as duas exigências (a/c máximo e classe), além do cobrimento. Elas trabalham em conjunto.",
+  "errosComuns": [
+    "Escolher o fck só pelo dimensionamento e esquecer o piso imposto pela durabilidade.",
+    "Especificar apenas o fck: sem o limite de a/c, é possível atingir a resistência com um traço mais poroso do que o desejado.",
+    "Permitir adição de água na obra para \"melhorar\" a trabalhabilidade, o que aumenta a relação a/c real.",
+    "Achar que um cobrimento maior compensa um concreto de má qualidade: espessura e qualidade são exigências independentes."
+  ],
+  "valores": [
+    { "rotulo": "CAA I: relação a/c máxima", "dado": "durabilidade/qualidadeConcreto.armado.I.relacaoAcMax" },
+    { "rotulo": "CAA I: classe mínima (MPa)", "dado": "durabilidade/qualidadeConcreto.armado.I.classeMin" },
+    { "rotulo": "CAA II: relação a/c máxima", "dado": "durabilidade/qualidadeConcreto.armado.II.relacaoAcMax" },
+    { "rotulo": "CAA II: classe mínima (MPa)", "dado": "durabilidade/qualidadeConcreto.armado.II.classeMin" },
+    { "rotulo": "CAA III: relação a/c máxima", "dado": "durabilidade/qualidadeConcreto.armado.III.relacaoAcMax" },
+    { "rotulo": "CAA III: classe mínima (MPa)", "dado": "durabilidade/qualidadeConcreto.armado.III.classeMin" },
+    { "rotulo": "CAA IV: relação a/c máxima", "dado": "durabilidade/qualidadeConcreto.armado.IV.relacaoAcMax" },
+    { "rotulo": "CAA IV: classe mínima (MPa)", "dado": "durabilidade/qualidadeConcreto.armado.IV.classeMin" }
+  ],
+  "simuladores": ["nbr6118:caa-cobrimento"],
+  "checklist": [
+    "A classe do concreto atende ao mínimo da classe de agressividade.",
+    "A relação a/c máxima está escrita na especificação.",
+    "O fck adotado no cálculo é igual ou superior ao mínimo de durabilidade."
+  ],
+  "quiz": [
+    {
+      "pergunta": "Por que reduzir a relação água/cimento melhora a durabilidade?",
+      "opcoes": [
+        "Porque o concreto fica mais leve",
+        "Porque diminui a porosidade capilar e dificulta a entrada de agentes agressivos",
+        "Porque acelera a pega do cimento",
+        "Porque aumenta a aderência das fôrmas"
+      ],
+      "correta": 1,
+      "explicacao": "A água que sobra da hidratação vira poro. Menos água excedente, menos caminhos para CO₂, umidade e cloretos."
+    },
+    {
+      "pergunta": "O dimensionamento de uma viga em ambiente agressivo é atendido com um concreto de classe inferior à mínima de durabilidade. O que fazer?",
+      "opcoes": [
+        "Usar a classe inferior, já que a resistência é suficiente",
+        "Usar a classe inferior e aumentar o cobrimento",
+        "Adotar pelo menos a classe mínima exigida pela durabilidade",
+        "Usar a classe inferior e aplicar pintura protetora"
+      ],
+      "correta": 2,
+      "explicacao": "A classe mínima de durabilidade é um piso. Cobrimento maior não substitui a qualidade do concreto: as duas exigências valem ao mesmo tempo."
+    }
+  ],
+  "referencias": [
+    { "item": "NBR 6118:2023, item 7.4", "descricao": "Qualidade do concreto de cobrimento." },
+    { "item": "NBR 6118:2023, item 7.4.2", "descricao": "Correspondência entre agressividade, relação a/c e resistência." },
+    { "item": "NBR 6118:2023, Tabela 7.1", "descricao": "Relação a/c máxima e classe mínima de concreto por classe de agressividade." }
+  ],
+  "conexoes": [
+    { "alvo": "nbr6118:classe-agressividade-ambiental", "tipo": "depende-de" },
+    { "alvo": "nbr6118:cobrimento-nominal", "tipo": "relacionado" },
+    { "alvo": "nbr12655:requisitos-de-durabilidade", "tipo": "relacionado" }
+  ],
+  "pareto": { "importancia": 5, "frequencia": 4, "dificuldade": 2, "tempoEstudoMin": 10 },
+  "tags": ["a/c", "fck", "porosidade", "permeabilidade", "classe de resistência"],
+  "status": "rascunho"
+}
