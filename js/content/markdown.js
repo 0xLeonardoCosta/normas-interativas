@@ -45,10 +45,7 @@ export const markdownEmLinha = (texto) => emLinha(String(texto ?? ''));
 const KATEX = 'https://cdn.jsdelivr.net/npm/katex@0.16.11/dist';
 let katexPronto = null;
 
-/** Renderiza as fórmulas dentro de `raiz`. O KaTeX só é baixado se houver fórmula. */
-export async function renderizarFormulas(raiz) {
-  const alvos = raiz.querySelectorAll('.formula[data-tex]');
-  if (!alvos.length) return;
+function carregarKatex() {
   katexPronto ??= (async () => {
     const folha = document.createElement('link');
     folha.rel = 'stylesheet';
@@ -56,6 +53,21 @@ export async function renderizarFormulas(raiz) {
     document.head.append(folha);
     return (await import(`${KATEX}/katex.mjs`)).default;
   })();
+  return katexPronto;
+}
+
+/** Baixa o KaTeX antes de ser preciso (ao passar o mouse em um conceito), para a fórmula não piscar em TeX. */
+export function aquecerFormulas() {
+  carregarKatex().catch(() => {
+    katexPronto = null;
+  });
+}
+
+/** Renderiza as fórmulas dentro de `raiz`. O KaTeX só é baixado se houver fórmula. */
+export async function renderizarFormulas(raiz) {
+  const alvos = raiz.querySelectorAll('.formula[data-tex]');
+  if (!alvos.length) return;
+  carregarKatex();
   try {
     const katex = await katexPronto;
     for (const el of alvos) {

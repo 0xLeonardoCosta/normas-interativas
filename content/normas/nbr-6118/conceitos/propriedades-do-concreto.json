@@ -1,0 +1,90 @@
+{
+  "id": "nbr6118:propriedades-do-concreto",
+  "norma": "nbr6118",
+  "versao": "2023",
+  "tema": "concreto",
+  "titulo": "fck e as propriedades do concreto",
+  "resumo": "O projeto especifica um número só, o fck. Dele a norma permite estimar as outras propriedades usadas no cálculo: resistência de cálculo, resistência à tração e módulo de elasticidade. Entender essa cadeia evita esperar do concreto o que ele não entrega.",
+  "oQueE": "O **fck** é a resistência característica à compressão: o valor que quase todos os corpos de prova do concreto devem superar. É a única propriedade mecânica que o projeto costuma especificar e a obra costuma controlar.\n\nA partir dele, na falta de ensaios, a norma fornece expressões para estimar:\n\n- a **resistência de cálculo** à compressão, $f_{cd} = f_{ck} / \\gamma_c$;\n- a **resistência à tração**, com um valor médio $f_{ct,m}$ e dois valores característicos, inferior e superior;\n- o **módulo de elasticidade**, inicial ($E_{ci}$) e secante ($E_{cs}$), que também depende do tipo de agregado graúdo.\n\nAs classes de resistência são divididas em dois grupos, e as expressões mudam de um grupo para o outro.",
+  "porQueExiste": "Ensaiar tração e módulo de elasticidade em toda obra seria caro e lento, enquanto o ensaio de compressão é simples e universal. As expressões da norma aproveitam o fato de que as propriedades do concreto andam juntas: uma pasta mais resistente também resiste mais à tração e deforma menos.\n\nMas elas **não crescem na mesma proporção**. A tração e o módulo crescem bem mais devagar do que a compressão. Por isso um concreto de classe mais alta resolve problemas de resistência com facilidade, mas ajuda pouco em problemas de fissuração e de flecha.\n\nA tração tem dois valores característicos porque a pergunta muda conforme o problema. Quando a tração *ajuda* (aderência, ancoragem), usa-se o valor inferior, a favor da segurança. Quando ela *atrapalha* (calcular a armadura mínima que precisa suportar a força liberada na fissuração), o valor desfavorável é o superior.\n\nO módulo depende do agregado porque a brita ocupa a maior parte do volume do concreto: uma rocha mais rígida produz um concreto mais rígido, com o mesmo fck.",
+  "ondeSeAplica": [
+    "Dimensionamento no estado-limite último (fcd)",
+    "Aderência e comprimento de ancoragem (fctd)",
+    "Momento de fissuração e armadura mínima (fct)",
+    "Flechas e análise estrutural (Ecs)"
+  ],
+  "quandoUsar": "Em todo projeto, logo depois de fixar a classe do concreto. Se houver ensaios do concreto que será usado, eles têm prioridade sobre as estimativas. Em estruturas sensíveis a deformações, vale especificar o módulo de elasticidade no projeto e exigir o ensaio, em vez de confiar apenas na estimativa.",
+  "errosComuns": [
+    "Aumentar o fck esperando reduzir flechas na mesma proporção: o módulo cresce muito menos que a resistência.",
+    "Ignorar o tipo de agregado da região ao estimar o módulo de elasticidade.",
+    "Usar a tração média onde o problema pede o valor característico inferior (ou o superior).",
+    "Usar o módulo inicial onde a norma pede o secante.",
+    "Aplicar a expressão de um grupo de resistência a um concreto do outro grupo."
+  ],
+  "valores": [
+    { "rotulo": "Coeficiente de ponderação do concreto γc (combinações normais)", "dado": "materiais/coeficientesPonderacao.gamaC" },
+    { "rotulo": "Tração característica inferior ÷ tração média", "dado": "materiais/resistenciaTracao.fatorInferior" },
+    { "rotulo": "Tração característica superior ÷ tração média", "dado": "materiais/resistenciaTracao.fatorSuperior" },
+    { "rotulo": "αE para basalto ou diabásio", "dado": "materiais/moduloElasticidade.alfaE.basalto" },
+    { "rotulo": "αE para granito ou gnaisse", "dado": "materiais/moduloElasticidade.alfaE.granito" },
+    { "rotulo": "αE para calcário", "dado": "materiais/moduloElasticidade.alfaE.calcario" },
+    { "rotulo": "αE para arenito", "dado": "materiais/moduloElasticidade.alfaE.arenito" }
+  ],
+  "simuladores": ["nbr6118:propriedades-fck"],
+  "checklist": [
+    "A classe do concreto atende ao mínimo exigido pela classe de agressividade.",
+    "O agregado graúdo considerado no módulo de elasticidade é o disponível na região da obra.",
+    "As verificações de serviço usam o módulo secante.",
+    "O projeto informa o módulo de elasticidade esperado quando as deformações são críticas."
+  ],
+  "quiz": [
+    {
+      "pergunta": "Um projeto troca o concreto C25 por C50 para reduzir a flecha de uma viga. O que esperar?",
+      "opcoes": [
+        "A flecha cai pela metade, porque a resistência dobrou",
+        "A flecha diminui, mas bem menos que a metade, porque o módulo cresce mais devagar que o fck",
+        "A flecha não muda, porque o módulo não depende do fck",
+        "A flecha aumenta, porque concretos mais resistentes são mais deformáveis"
+      ],
+      "correta": 1,
+      "explicacao": "O módulo de elasticidade aumenta com o fck, mas em proporção bem menor. Para flecha, aumentar a altura da seção costuma render muito mais."
+    },
+    {
+      "pergunta": "Por que a ancoragem usa a resistência à tração característica inferior?",
+      "opcoes": [
+        "Porque é o valor medido em obra",
+        "Porque nela a tração do concreto trabalha a favor, e o valor seguro é o menor",
+        "Porque o valor superior só vale para concreto protendido",
+        "Porque o valor médio não é definido pela norma"
+      ],
+      "correta": 1,
+      "explicacao": "Quando a propriedade ajuda a resistir, a segurança pede o valor que quase todo o concreto supera: o inferior."
+    },
+    {
+      "pergunta": "Dois concretos têm o mesmo fck, um com brita de basalto e outro com brita de arenito. O que muda?",
+      "opcoes": [
+        "Nada: o fck define tudo",
+        "A resistência à tração",
+        "O módulo de elasticidade estimado",
+        "A resistência de cálculo à compressão"
+      ],
+      "correta": 2,
+      "explicacao": "A estimativa do módulo leva um fator que depende da rocha do agregado graúdo. As resistências dependem apenas do fck."
+    }
+  ],
+  "referencias": [
+    { "item": "NBR 6118:2023, item 8.2.1", "descricao": "Classes de resistência do concreto e grupos." },
+    { "item": "NBR 6118:2023, item 8.2.5", "descricao": "Resistência à tração: valor médio e valores característicos." },
+    { "item": "NBR 6118:2023, item 8.2.8", "descricao": "Módulo de elasticidade inicial e secante." },
+    { "item": "NBR 6118:2023, item 12.3.3", "descricao": "Resistências de cálculo do concreto." },
+    { "item": "NBR 6118:2023, Tabela 12.1", "descricao": "Coeficientes de ponderação das resistências." }
+  ],
+  "conexoes": [
+    { "alvo": "nbr6118:qualidade-do-concreto", "tipo": "relacionado" },
+    { "alvo": "nbr6118:aderencia-aco-concreto", "tipo": "influencia" },
+    { "alvo": "nbr6118:abertura-de-fissuras", "tipo": "influencia" }
+  ],
+  "pareto": { "importancia": 5, "frequencia": 5, "dificuldade": 2, "tempoEstudoMin": 15 },
+  "tags": ["fck", "fcd", "fctm", "fctk", "módulo de elasticidade", "Eci", "Ecs", "tração", "agregado"],
+  "status": "rascunho"
+}

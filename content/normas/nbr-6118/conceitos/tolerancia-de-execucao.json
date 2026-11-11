@@ -24,6 +24,11 @@
     { "rotulo": "Δc com controle rigoroso de execução", "dado": "durabilidade/deltaC.controleRigoroso" }
   ],
   "simuladores": ["nbr6118:caa-cobrimento"],
+  "checklist": [
+    "O Δc adotado está indicado nos desenhos.",
+    "Se o Δc reduzido foi usado, a exigência de controle rigoroso está escrita no projeto.",
+    "Os espaçadores especificados correspondem ao cobrimento nominal, não ao mínimo."
+  ],
   "quiz": [
     {
       "pergunta": "Para que serve a tolerância de execução Δc?",

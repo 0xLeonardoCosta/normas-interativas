@@ -8,8 +8,6 @@ import { backlinks } from '../js/content/graph.js';
 import { markdown } from '../js/content/markdown.js';
 import * as registro from '../js/registry.js';
 
-const NOMES_DE_DADOS = ['durabilidade'];
-
 export default async function suiteConteudo(teste, ambiente, avisar) {
   const catalogo = await ambiente.lerJSON('content/normas.json');
 
@@ -20,6 +18,8 @@ export default async function suiteConteudo(teste, ambiente, avisar) {
     const conceitos = await Promise.all(
       slugs.map(async (arquivo) => ({ arquivo, conteudo: await ambiente.lerJSON(`${raiz}/conceitos/${arquivo}.json`) })),
     );
+    // Os arquivos de valores normativos de cada norma são declarados em norma.json (`dados`).
+    const NOMES_DE_DADOS = norma.dados || [];
     const dados = {};
     for (const nome of NOMES_DE_DADOS) dados[nome] = await ambiente.lerJSON(`${raiz}/dados/${nome}.json`);
     const idsFluxo = [...new Set(conceitos.map((c) => c.conteudo.fluxograma).filter(Boolean))];

@@ -115,8 +115,14 @@ export async function render({ params, voltar }) {
     : null;
 
   const checklist = c.checklist?.length
-    ? h('ul', { class: 'checklist' }, c.checklist.map((t) =>
-        h('li', null, h('label', null, h('input', { type: 'checkbox' }), h('span', { html: markdownEmLinha(t) })))))
+    ? h('ul', { class: 'checklist' }, c.checklist.map((t, i) =>
+        h('li', null, h('label', null,
+          h('input', {
+            type: 'checkbox',
+            checked: (progresso().checklist?.[id] || []).includes(i),
+            onchange: (e) => acoes.marcarChecklist(id, i, e.target.checked),
+          }),
+          h('span', { html: markdownEmLinha(t) })))))
     : null;
 
   const el = h('article', { class: 'conceito cor-tema', style: { '--tema-h': tema?.matiz } },

@@ -3,6 +3,7 @@ import { store, acoes } from './store.js';
 import { criarRoteador } from './router.js';
 import { carregarBiblioteca, preCarregarConceito } from './content/loader.js';
 import { iconeHTML } from './ui/icons.js';
+import { aquecerFormulas } from './content/markdown.js';
 
 for (const el of document.querySelectorAll('[data-icone]')) el.outerHTML = iconeHTML(el.dataset.icone, 16);
 
@@ -75,7 +76,9 @@ addEventListener('keydown', (e) => {
 // --- Pré-carregamento ao passar o mouse ou focar ---------------------------------------------------
 function aquecer(e) {
   const link = e.target instanceof Element && e.target.closest('a[href^="#/conceito/"]');
-  if (link) preCarregarConceito(decodeURIComponent(link.getAttribute('href').slice('#/conceito/'.length)));
+  if (!link) return;
+  preCarregarConceito(decodeURIComponent(link.getAttribute('href').slice('#/conceito/'.length)));
+  aquecerFormulas();
 }
 document.addEventListener('pointerover', aquecer, { passive: true });
 document.addEventListener('focusin', aquecer);

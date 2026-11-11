@@ -1,0 +1,95 @@
+{
+  "id": "nbr6118:comprimento-de-ancoragem",
+  "norma": "nbr6118",
+  "versao": "2023",
+  "tema": "detalhamento",
+  "titulo": "Comprimento de ancoragem",
+  "resumo": "Toda barra precisa de um trecho além do ponto em que deixa de ser necessária, para transferir sua força ao concreto. O comprimento básico vem do equilíbrio entre a força da barra e a aderência; o necessário ajusta esse valor ao caso real.",
+  "oQueE": "O **comprimento de ancoragem básico** é o trecho reto que uma barra precisa ter dentro do concreto para transferir, por aderência, a força que a leva ao escoamento:\n\n$$l_b = \\frac{\\phi}{4} \\cdot \\frac{f_{yd}}{f_{bd}}$$\n\nO **comprimento necessário** adapta o básico à situação real:\n\n$$l_{b,nec} = \\alpha \\, l_b \\, \\frac{A_{s,calc}}{A_{s,ef}} \\geq l_{b,min}$$\n\n- $\\alpha$ considera a presença de gancho na extremidade;\n- a razão entre armadura calculada e armadura existente reduz o comprimento quando há aço sobrando;\n- $l_{b,min}$ é um piso que vale em qualquer caso.",
+  "porQueExiste": "Imagine puxar uma barra cravada no concreto. A força que você aplica é resistida pela aderência ao longo de toda a superfície enterrada. Se o trecho for curto, a barra sai antes de escoar e a armadura não entrega a resistência com que o cálculo contou.\n\nA expressão do comprimento básico é esse equilíbrio. A força da barra é a área da seção vezes a tensão de escoamento. A resistência é o perímetro vezes o comprimento vezes a tensão de aderência. Igualando as duas, sobra o diâmetro dividido por quatro.\n\nDaí saem as consequências práticas: barra **mais grossa** pede mais comprimento (a área cresce com o quadrado do diâmetro e o perímetro só com o diâmetro); concreto **mais resistente** ou zona de **boa aderência** encurtam a ancoragem; e, se a armadura existente é maior do que a calculada, cada barra trabalha com tensão menor e precisa de menos comprimento.\n\nO comprimento mínimo existe porque a conta parte de um modelo simplificado. Em trechos muito curtos, pequenos desvios de posição, fissuras e defeitos locais pesam demais.",
+  "ondeSeAplica": [
+    "Ancoragem da armadura nos apoios de vigas e lajes",
+    "Corte de barras ao longo do vão (decalagem)",
+    "Arranques de pilares e esperas de fundações",
+    "Base para o comprimento das emendas por traspasse"
+  ],
+  "quandoUsar": "Sempre que uma barra termina ou muda de função. Calcule o comprimento básico uma vez para cada combinação de concreto, aço, bitola e zona de aderência usada no projeto, e monte uma tabela. O comprimento necessário é verificado depois, caso a caso, com a armadura realmente adotada.",
+  "errosComuns": [
+    "Usar o comprimento de boa aderência para barras que estão em zona de má aderência.",
+    "Aplicar a redução do gancho sem garantir o cobrimento lateral que a norma exige para isso.",
+    "Reduzir o comprimento pela sobra de armadura e esquecer de conferir o comprimento mínimo.",
+    "Medir a ancoragem a partir do eixo do apoio, e não da seção em que a barra deixa de ser necessária.",
+    "Reaproveitar uma tabela de ancoragem feita para outra classe de concreto."
+  ],
+  "valores": [
+    { "rotulo": "Piso do comprimento básico, em diâmetros da barra", "dado": "ancoragem/comprimentoBasico.minimoEmDiametros" },
+    { "rotulo": "α para barra sem gancho", "dado": "ancoragem/alfaGancho.semGancho" },
+    { "rotulo": "α para barra com gancho", "dado": "ancoragem/alfaGancho.comGancho" },
+    { "rotulo": "Comprimento mínimo: fração do comprimento básico", "dado": "ancoragem/comprimentoMinimo.fracaoDoBasico" },
+    { "rotulo": "Comprimento mínimo: em diâmetros da barra", "dado": "ancoragem/comprimentoMinimo.emDiametros" },
+    { "rotulo": "Comprimento mínimo: valor absoluto", "dado": "ancoragem/comprimentoMinimo.absoluto" }
+  ],
+  "simuladores": ["nbr6118:ancoragem"],
+  "exemplos": [
+    {
+      "titulo": "Leitura rápida em diâmetros",
+      "texto": "Como o comprimento básico é proporcional ao diâmetro, ele costuma ser expresso em múltiplos de $\\phi$. Para um mesmo concreto, aço e zona de aderência, o número de diâmetros é o mesmo para qualquer bitola abaixo do limite em que $\\eta_3$ começa a atuar. Use o simulador: mude só a bitola e observe que o comprimento em centímetros muda, mas o valor em $\\phi$ permanece."
+    }
+  ],
+  "checklist": [
+    "O comprimento básico foi calculado para cada combinação de concreto, aço, bitola e zona de aderência.",
+    "A zona de aderência de cada barra foi conferida.",
+    "Onde há gancho, o cobrimento lateral exigido foi verificado.",
+    "O comprimento necessário respeita o mínimo.",
+    "Os comprimentos estão indicados nos desenhos, a partir da seção correta."
+  ],
+  "quiz": [
+    {
+      "pergunta": "Ao trocar uma barra de 10 mm por uma de 20 mm, mantendo o resto, o comprimento básico de ancoragem:",
+      "opcoes": [
+        "Fica igual",
+        "Dobra",
+        "Quadruplica",
+        "Cai pela metade"
+      ],
+      "correta": 1,
+      "explicacao": "A força cresce com a área (diâmetro ao quadrado) e a superfície de aderência cresce com o perímetro (diâmetro). O resultado é um comprimento proporcional ao diâmetro."
+    },
+    {
+      "pergunta": "A armadura adotada em um apoio é o dobro da calculada. O que acontece com o comprimento necessário?",
+      "opcoes": [
+        "Dobra, porque há mais barras",
+        "Não muda",
+        "Pode cair até a metade, mas nunca abaixo do comprimento mínimo",
+        "Cai para zero"
+      ],
+      "correta": 2,
+      "explicacao": "Com aço sobrando, cada barra trabalha com tensão menor e precisa de menos comprimento. O piso do comprimento mínimo continua valendo."
+    },
+    {
+      "pergunta": "O que encurta o comprimento de ancoragem?",
+      "opcoes": [
+        "Usar barra mais grossa",
+        "Posicionar a barra em zona de má aderência",
+        "Aumentar a classe do concreto",
+        "Usar barra lisa no lugar de nervurada"
+      ],
+      "correta": 2,
+      "explicacao": "Concreto mais resistente tem mais resistência à tração e, portanto, mais aderência. As outras três opções alongam a ancoragem."
+    }
+  ],
+  "referencias": [
+    { "item": "NBR 6118:2023, item 9.4.2.1", "descricao": "Ancoragem de armaduras passivas por aderência." },
+    { "item": "NBR 6118:2023, item 9.4.2.3", "descricao": "Ganchos das armaduras de tração." },
+    { "item": "NBR 6118:2023, item 9.4.2.4", "descricao": "Comprimento de ancoragem básico." },
+    { "item": "NBR 6118:2023, item 9.4.2.5", "descricao": "Comprimento de ancoragem necessário e comprimento mínimo." }
+  ],
+  "conexoes": [
+    { "alvo": "nbr6118:aderencia-aco-concreto", "tipo": "depende-de" },
+    { "alvo": "nbr6118:propriedades-do-concreto", "tipo": "depende-de" },
+    { "alvo": "nbr6118:cobrimento-nominal", "tipo": "relacionado" }
+  ],
+  "pareto": { "importancia": 5, "frequencia": 5, "dificuldade": 3, "tempoEstudoMin": 20 },
+  "tags": ["ancoragem", "lb", "lb,nec", "gancho", "traspasse", "decalagem", "apoio"],
+  "status": "rascunho"
+}

@@ -57,6 +57,7 @@ export const store = criarStore(
     progresso: {
       lidos: {}, // { [idConceito]: timestamp }
       quiz: {}, // { [idConceito]: { acertos, total } }
+      checklist: {}, // { [idConceito]: [índices marcados] }
     },
     mapa: { expandidos: null, vista: null }, // só em memória
   },
@@ -80,6 +81,16 @@ export const acoes = {
       ...e,
       progresso: { ...e.progresso, quiz: { ...e.progresso.quiz, [id]: { acertos, total } } },
     }));
+  },
+  marcarChecklist(id, indice, marcado) {
+    store.set((e) => {
+      const atual = new Set(e.progresso.checklist?.[id] || []);
+      if (marcado) atual.add(indice);
+      else atual.delete(indice);
+      const checklist = { ...e.progresso.checklist, [id]: [...atual].sort((a, b) => a - b) };
+      if (!atual.size) delete checklist[id];
+      return { ...e, progresso: { ...e.progresso, checklist } };
+    });
   },
   lembrarMapa(mapa) {
     store.set((e) => ({ ...e, mapa: { ...e.mapa, ...mapa } }));

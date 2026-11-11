@@ -22,4 +22,6 @@ export async function obter(tipo, id) {
 
 // --- NBR 6118 ---------------------------------------------------------------------------------
 registrar('simulador', 'nbr6118:caa-cobrimento', () => import('./simuladores/nbr6118/caa-cobrimento.js'));
+registrar('simulador', 'nbr6118:propriedades-fck', () => import('./simuladores/nbr6118/propriedades-fck.js'));
+registrar('simulador', 'nbr6118:ancoragem', () => import('./simuladores/nbr6118/ancoragem.js'));
 registrar('resolvedor', 'nbr6118:requisitos-durabilidade', () => import('./simuladores/nbr6118/resolvedores.js'));

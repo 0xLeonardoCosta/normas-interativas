@@ -4,6 +4,7 @@ import { readFile, readdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { rodar } from '../tests/harness.js';
 import suiteCalculo from '../tests/calc.test.js';
+import suiteMateriais from '../tests/materiais.test.js';
 import suiteConteudo from '../tests/conteudo.test.js';
 
 const raiz = new URL('../', import.meta.url);
@@ -18,7 +19,7 @@ const ambiente = {
   },
 };
 
-const { resultados, avisos, falhas } = await rodar([suiteCalculo, suiteConteudo], ambiente);
+const { resultados, avisos, falhas } = await rodar([suiteCalculo, suiteMateriais, suiteConteudo], ambiente);
 
 for (const r of resultados) console.log(`${r.ok ? '  ok  ' : ' FALHA'}  ${r.nome}${r.ok ? '' : `\n         ${r.erro}`}`);
 for (const a of avisos) console.log(` aviso  ${a}`);

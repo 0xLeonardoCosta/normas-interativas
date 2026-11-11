@@ -64,6 +64,8 @@ export async function render() {
     if (ativo && ativo !== document.body && ativo.id !== 'conteudo') return;
     e.preventDefault();
     mapa.focar();
+    // Repassa a tecla ao nó focado, para a primeira seta já mover a seleção.
+    document.activeElement?.dispatchEvent(new KeyboardEvent('keydown', { key: e.key, bubbles: true, cancelable: true }));
   }
   addEventListener('keydown', aoTeclar);
   document.documentElement.classList.add('tela-cheia');
