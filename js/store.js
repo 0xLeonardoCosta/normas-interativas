@@ -92,6 +92,9 @@ export const acoes = {
       return { ...e, progresso: { ...e.progresso, checklist } };
     });
   },
+  limparProgresso() {
+    store.set((e) => ({ ...e, progresso: { lidos: {}, quiz: {}, checklist: {} } }));
+  },
   lembrarMapa(mapa) {
     store.set((e) => ({ ...e, mapa: { ...e.mapa, ...mapa } }));
   },

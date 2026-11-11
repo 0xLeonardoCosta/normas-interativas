@@ -260,3 +260,18 @@
     padding-bottom: calc(58px + env(safe-area-inset-bottom));
   }
 }
+
+/* Com quatro itens na navegação, o topo aperta em telas médias: a busca encolhe antes de quebrar linha. */
+.nav a {
+  white-space: nowrap;
+}
+
+@media (min-width: 721px) and (max-width: 1000px) {
+  .busca-gatilho {
+    min-width: 0;
+  }
+
+  .busca-gatilho span {
+    display: none;
+  }
+}

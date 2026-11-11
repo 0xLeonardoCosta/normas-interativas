@@ -26,3 +26,19 @@ export function progressoDe(entradas, progresso) {
   const quizzes = comQuiz.filter((e) => progresso.quiz[e.id]).length;
   return { total, lidos, quizzes, totalQuizzes: comQuiz.length, fracao: total ? lidos / total : 0 };
 }
+
+/** Quizzes de um conjunto de conceitos: quantos foram respondidos e o aproveitamento (0 a 1). */
+export function resumoDeQuizzes(entradas, progresso) {
+  const comQuiz = entradas.filter((e) => e.temQuiz);
+  let acertos = 0;
+  let questoes = 0;
+  let respondidos = 0;
+  for (const e of comQuiz) {
+    const q = progresso.quiz[e.id];
+    if (!q) continue;
+    respondidos += 1;
+    acertos += q.acertos;
+    questoes += q.total;
+  }
+  return { total: comQuiz.length, respondidos, acertos, questoes, aproveitamento: questoes ? acertos / questoes : 0 };
+}

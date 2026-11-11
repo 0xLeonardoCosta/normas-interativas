@@ -3,8 +3,8 @@ import { afirmar } from './harness.js';
 import { validarNorma, validarConceito, listarPendencias } from '../js/content/validate.js';
 import { gerarIndice } from '../js/content/indice.js';
 import { resolverDado } from '../js/content/dados.js';
-import { scorePareto, ordenarPorPareto, progressoDe } from '../js/content/pareto.js';
-import { backlinks } from '../js/content/graph.js';
+import { scorePareto, ordenarPorPareto, progressoDe, resumoDeQuizzes } from '../js/content/pareto.js';
+import { backlinks, montarGrafo, vizinhanca } from '../js/content/graph.js';
 import { markdown } from '../js/content/markdown.js';
 import * as registro from '../js/registry.js';
 
@@ -120,12 +120,29 @@ export default async function suiteConteudo(teste, ambiente, avisar) {
     afirmar.igual(ordenarPorPareto(lista).map((x) => x.id), ['c', 'b', 'a']);
     const p = progressoDe(lista, { lidos: { a: 1 }, quiz: { b: { acertos: 1, total: 2 } } });
     afirmar.igual([p.total, p.lidos, p.quizzes, p.totalQuizzes], [3, 1, 1, 2]);
+    const q = resumoDeQuizzes(lista, { lidos: {}, quiz: { b: { acertos: 1, total: 2 }, c: { acertos: 9, total: 9 } } });
+    afirmar.igual([q.total, q.respondidos, q.acertos, q.questoes, q.aproveitamento], [2, 1, 1, 2, 0.5]);
+    afirmar.igual(resumoDeQuizzes(lista, { lidos: {}, quiz: {} }).aproveitamento, 0);
   });
 
   teste('grafo: backlinks', () => {
     const entradas = [{ id: 'a', conexoes: [{ alvo: 'b', tipo: 'influencia' }] }, { id: 'b', conexoes: [] }];
     afirmar.igual(backlinks(entradas, 'b'), [{ origem: 'a', tipo: 'influencia' }]);
     afirmar.igual(backlinks(entradas, 'a'), []);
+  });
+
+  teste('grafo: nós externos, arestas sem par duplicado e vizinhança', () => {
+    const entradas = [
+      { id: 'a', conexoes: [{ alvo: 'b', tipo: 'influencia' }, { alvo: 'z:fora', tipo: 'relacionado' }] },
+      { id: 'b', conexoes: [{ alvo: 'a', tipo: 'depende-de' }] },
+      { id: 'c', conexoes: [] },
+    ];
+    const g = montarGrafo(entradas);
+    afirmar.igual(g.nos.map((n) => [n.id, n.externo]), [['a', false], ['b', false], ['c', false], ['z:fora', true]]);
+    afirmar.igual(g.arestas, [{ origem: 'a', alvo: 'b', tipo: 'influencia' }, { origem: 'a', alvo: 'z:fora', tipo: 'relacionado' }]);
+    const v = vizinhanca(g.arestas);
+    afirmar.igual([...v.get('a')].sort(), ['b', 'z:fora']);
+    afirmar.igual(v.has('c'), false);
   });
 
   teste('markdown: escapa HTML e preserva fórmulas', () => {

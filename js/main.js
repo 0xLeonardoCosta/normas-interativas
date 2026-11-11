@@ -40,6 +40,7 @@ const roteador = criarRoteador({
     { nome: 'home', padrao: /^\/$/, carregar: () => import('./ui/views/home.js') },
     { nome: 'pareto', padrao: /^\/pareto$/, carregar: () => import('./ui/views/pareto.js') },
     { nome: 'grafo', padrao: /^\/grafo$/, carregar: () => import('./ui/views/grafo.js') },
+    { nome: 'progresso', padrao: /^\/progresso$/, carregar: () => import('./ui/views/progresso.js') },
     { nome: 'conceito', padrao: /^\/conceito\/([a-z0-9]+:[a-z0-9-]+)$/, carregar: () => import('./ui/views/conceito.js') },
   ],
   naoEncontrada: { nome: 'nao-encontrada', carregar: () => import('./ui/views/nao-encontrado.js') },

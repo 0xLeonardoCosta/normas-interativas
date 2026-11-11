@@ -20,7 +20,7 @@ Depois abra `http://localhost:8000`. No Windows o comando costuma ser `python -m
 ## Testes
 
 - No navegador: abra `http://localhost:8000/tests.html`.
-- No terminal (Node 20 ou mais novo): `node tools/test.js`.
+- No terminal (Node 20 ou mais novo): `node tools/test.js`. Com Bun também funciona: `bun tools/test.js`.
 
 Os dois rodam os mesmos arquivos de `tests/`: validador de conteúdo (schema, conexões quebradas, índice em dia) e testes das funções de cálculo. O GitHub Actions roda `node tools/test.js` antes de publicar.
 
@@ -33,6 +33,7 @@ js/
   main.js, router.js, store.js, registry.js
   content/                 carregamento, validador, índice, Markdown, Pareto, grafo (sem DOM)
   calc/<norma>/            cálculos em funções puras, com testes
+  simuladores/             controles compartilhados
   simuladores/<norma>/     simuladores e resolvedores de fluxograma
   ui/                      componentes, telas, movimento e pan/zoom
 content/
@@ -84,12 +85,12 @@ Números da norma nunca são escritos no texto do conceito nem no código. Eles 
 { "rotulo": "Δc em obras correntes", "dado": "durabilidade/deltaC.padrao" }
 ```
 
-Enquanto `pendenteValidacao` for `true`, a interface mostra o selo "valor em validação". A lista do que falta conferir está em `docs/TODO-NORMA.md`.
+Um arquivo novo de valores precisa ser listado no campo `dados` de `norma.json`, para os testes o conferirem. Enquanto `pendenteValidacao` for `true`, a interface mostra o selo "valor em validação". A lista do que falta conferir está em `docs/TODO-NORMA.md`.
 
 ## Como adicionar uma norma
 
 1. Acrescente a norma em `content/normas.json` (`id`, `pasta`, `nome`, `titulo`, `versao`, `disponivel: true`).
-2. Crie `content/normas/<pasta>/norma.json` com `id`, `nome`, `titulo`, `versao` e `temas[]` (`id`, `nome`, `matiz` de 0 a 360 para a cor, `descricao`).
+2. Crie `content/normas/<pasta>/norma.json` com `id`, `nome`, `titulo`, `versao`, `temas[]` (`id`, `nome`, `matiz` de 0 a 360 para a cor, `descricao`) e, se houver valores normativos, `dados[]` com os nomes dos arquivos de `dados/`.
 3. Crie a pasta `conceitos/` com pelo menos um conceito e rode `node tools/build-index.js`.
 
 Conexões entre normas usam o id completo, por exemplo `nbr12655:requisitos-de-durabilidade`. Se a norma de destino ainda não existe, o validador só avisa e a interface mostra o link como "em breve".
@@ -101,14 +102,24 @@ Observação: nesta fase a home mostra o mapa da primeira norma disponível do c
 - Simulador: crie o módulo em `js/simuladores/<norma>/`, exportando `montar(container)` que devolve uma função de limpeza, e registre o id em `js/registry.js`. Depois cite o id em `simuladores[]` do conceito.
 - Fluxograma: crie o JSON em `content/normas/<pasta>/fluxogramas/` (nós `pergunta` com opções e um nó `resultado` com um `resolvedor` registrado) e cite o id no campo `fluxograma` do conceito.
 
+## Telas
+
+| Rota | Tela |
+|---|---|
+| `#/` | Mapa mental da norma |
+| `#/pareto` | Os 20%: conceitos por ordem de retorno |
+| `#/grafo` | Grafo de conceitos, com filtros por tema, status e prioridade |
+| `#/progresso` | Progresso geral e por tema |
+| `#/conceito/<id>` | Página de um conceito |
+
 ## Atalhos
 
 | Tecla | Ação |
 |---|---|
 | `Ctrl+K` / `⌘K` ou `/` | Busca |
-| Setas | Navegar entre os nós do mapa |
+| Setas | Navegar entre os nós do mapa e do grafo |
 | `Enter` | Expandir tema ou abrir conceito |
-| `+` `-` `0` | Zoom e enquadrar o mapa |
+| `+` `-` `0` | Zoom e enquadrar o mapa ou o grafo |
 | `Esc` | Voltar |
 
 ## Publicação

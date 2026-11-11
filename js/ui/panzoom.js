@@ -144,7 +144,10 @@ export function criarPanZoom(area, { min = 0.35, max = 2.5, inicial, aoMudar }) 
     const parado = e.timeStamp - ultimoTempo > 80;
     if (!foiArrasto || parado || movimentoReduzido() || Math.hypot(vel.x, vel.y) < 0.05) return;
     // Inércia: a velocidade decai exponencialmente (meia-vida ≈ 190 ms).
-    let v = { x: vel.x * 1000, y: vel.y * 1000 };
+    // Limita a velocidade inicial: um gesto brusco não deve arremessar a cena para longe.
+    const rapidez = Math.hypot(vel.x, vel.y) * 1000;
+    const teto = Math.min(1, 3200 / rapidez);
+    let v = { x: vel.x * 1000 * teto, y: vel.y * 1000 * teto };
     pararInercia = animar((dt) => {
       const atrito = Math.exp(-dt * 3.6);
       vista.x += v.x * dt;

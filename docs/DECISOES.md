@@ -88,5 +88,44 @@ Registro das decisões relevantes: o quê, por quê e o que foi descartado. As m
 ## 13. O que ficou fora da Fase 1
 
 - A home mostra a primeira norma disponível; o seletor de norma entra com a segunda norma.
-- `#/grafo` é uma tela "em breve".
+- `#/grafo` era uma tela "em breve" (implementada na Fase 2, decisão 15).
 - Lighthouse não foi medido nesta máquina (sem Node nem Chrome de linha de comando). Medir no site publicado.
+
+## 14. Fórmulas normativas: a forma no código, os coeficientes nos dados
+
+**O quê:** nos módulos `js/calc/nbr6118/materiais.js` e `ancoragem.js`, a estrutura de cada expressão (potência, logaritmo, produto) está no código, com o comentário `TODO-NORMA`. Todo coeficiente, expoente e limite vem de `dados/materiais.json` e `dados/ancoragem.json`. Expoentes fracionários são gravados como par `[numerador, denominador]`.
+
+**Por quê:** mantém a regra da decisão 1 (um único lugar para validar números) sem inventar uma linguagem de fórmulas em JSON. Os testes de lógica usam coeficientes fictícios que dão contas exatas.
+
+**Consequência:** `norma.json` passou a declarar os arquivos de valores no campo `dados`, e os testes percorrem essa lista.
+
+## 15. Grafo global
+
+- **Layout:** d3-force 3.0.0 pela CDN, usado só para as posições. O desenho é SVG próprio, como no mapa. Se a CDN falhar, o grafo aparece em círculo, sem física.
+- **Entrada sem "explosão":** a simulação roda 260 passos antes da primeira pintura. Depois disso ela só volta a rodar ao arrastar um nó ou mudar um filtro, no laço de animação compartilhado.
+- **Nós:** um por conceito, com raio proporcional ao score de Pareto e preenchido quando lido. Conexões para normas ainda não disponíveis viram nós tracejados, sem link.
+- **Arestas:** uma por par de conceitos. Se A cita B e B cita A, vale a primeira declaração na ordem do índice.
+- **Filtros:** tema, status e score mínimo. Filtrar refaz a simulação só com os nós visíveis e enquadra de novo.
+- **Arrastar:** o nó segue o ponteiro e volta a obedecer às forças ao ser solto (não fica fixado).
+- **Concessão:** como no mapa, as arestas mudam o atributo `d` a cada quadro.
+
+**Descartado:** canvas (perderia foco por teclado e nomes acessíveis; com dezenas de nós o SVG dá conta) e nós para os temas (o grafo mostra relações entre conceitos; a hierarquia já está no mapa).
+
+## 16. Painel de progresso
+
+**O quê:** rota `#/progresso`, com números gerais, próximo conceito pelo Pareto e um cartão por tema. O CLAUDE.md lista assuntos (Flexão, Cisalhamento, Punção...) que hoje não são temas de `norma.json`; o painel segue os temas existentes e ganhará esses recortes quando houver conceitos para eles.
+
+**Apagar progresso:** confirmação no próprio botão (segundo clique em até 4 s), sem diálogo.
+
+**Checklist:** o estado passou a ser salvo (`progresso.checklist`), revendo a decisão 12.
+
+## 17. Novos simuladores
+
+- **Propriedades do concreto:** dois gráficos (tração e módulo) em função do fck, com marcador no valor atual. Os eixos são fixos para o agregado mais rígido, para a troca de agregado ser comparável.
+- **Ancoragem:** barra desenhada em escala; a escala se ajusta por mola quando o comprimento muda muito. As bitolas são as comerciais usuais e servem só ao desenho; o simulador não impede combinações que o mercado não oferece (por exemplo CA-60 em bitola grossa).
+- **Fora desta etapa:** simuladores de fissuração e de estados-limites. As expressões envolvem mais hipóteses de engenharia do que as desta etapa e pedem definição do responsável técnico antes.
+- Os controles (grupo de opções, deslizante, alternador, painéis) foram extraídos para `js/simuladores/controles.js`.
+
+## 18. Scripts Node rodados com Bun nesta máquina
+
+`tools/test.js` e `tools/build-index.js` usam só APIs do Node e rodam igual com `bun`. O GitHub Actions continua usando Node 22.
