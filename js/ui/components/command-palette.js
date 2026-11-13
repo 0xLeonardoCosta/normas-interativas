@@ -23,6 +23,7 @@ export async function criarPaleta({ roteador, alternarTema }) {
     { tipo: 'acao', id: 'ir-mapa', titulo: 'Abrir o mapa', icone: 'mapa', acao: () => roteador.ir('/') },
     { tipo: 'acao', id: 'ir-pareto', titulo: 'Abrir Os 20%', icone: 'alvo', acao: () => roteador.ir('/pareto') },
     { tipo: 'acao', id: 'ir-grafo', titulo: 'Abrir o grafo', icone: 'grafo', acao: () => roteador.ir('/grafo') },
+    { tipo: 'acao', id: 'ir-praticar', titulo: 'Praticar: revisão e estudos de caso', icone: 'praticar', acao: () => roteador.ir('/praticar') },
     { tipo: 'acao', id: 'ir-progresso', titulo: 'Abrir o progresso', icone: 'progresso', acao: () => roteador.ir('/progresso') },
     { tipo: 'acao', id: 'tema', titulo: 'Alternar tema claro / escuro', icone: 'sol', acao: alternarTema },
   ];

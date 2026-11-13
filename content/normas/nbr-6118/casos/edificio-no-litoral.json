@@ -1,0 +1,165 @@
+{
+  "id": "nbr6118:edificio-no-litoral",
+  "norma": "nbr6118",
+  "versao": "2023",
+  "titulo": "Edifício residencial de frente para o mar",
+  "resumo": "Você é o projetista de um prédio na orla. Cada decisão de durabilidade puxa a próxima: ambiente, concreto, cobrimento, execução e fissuração.",
+  "contexto": "Um edifício residencial de oito pavimentos, em concreto armado, vai ser construído na avenida da orla de uma cidade litorânea. A fachada fica de frente para o mar, exposta à névoa salina trazida pelo vento. Nenhum elemento fica em contato com a água do mar nem é atingido por respingos de maré.\n\nVocê é o responsável pelo projeto estrutural. As decisões a seguir ficam no papel por décadas.",
+  "status": "rascunho",
+  "conceitos": [
+    "nbr6118:classe-agressividade-ambiental",
+    "nbr6118:qualidade-do-concreto",
+    "nbr6118:cobrimento-nominal",
+    "nbr6118:tolerancia-de-execucao",
+    "nbr6118:abertura-de-fissuras",
+    "nbr6118:combinacoes-de-acoes"
+  ],
+  "inicio": "ambiente",
+  "etapas": {
+    "ambiente": {
+      "tipo": "decisao",
+      "texto": "Tudo começa pelo ambiente: ele define o concreto, o cobrimento e o limite de fissuras.",
+      "pergunta": "Em que classe de agressividade ambiental você enquadra a estrutura?",
+      "conceitos": ["nbr6118:classe-agressividade-ambiental"],
+      "opcoes": [
+        {
+          "texto": "CAA I: fraca (ambiente rural)",
+          "feedback": "A névoa salina leva cloretos até a fachada. Classificar como rural ignora o principal agente de corrosão do litoral.",
+          "proxima": "efeito-caa-branda"
+        },
+        {
+          "texto": "CAA II: moderada (ambiente urbano)",
+          "feedback": "O prédio está em uma cidade, mas o que manda é o agente agressivo dominante. Aqui são os cloretos do mar, não só o CO₂ urbano.",
+          "proxima": "efeito-caa-branda"
+        },
+        {
+          "texto": "CAA III: forte (ambiente marinho)",
+          "correta": true,
+          "feedback": "Isso. Exposição à névoa salina caracteriza o ambiente marinho.",
+          "proxima": "concreto"
+        },
+        {
+          "texto": "CAA IV: muito forte (respingos de maré)",
+          "feedback": "A classe IV é para elementos atingidos por respingos ou pela variação da maré. Nenhum elemento deste prédio está nessa situação; usar IV encareceria a obra sem necessidade.",
+          "proxima": "ambiente"
+        }
+      ]
+    },
+    "efeito-caa-branda": {
+      "tipo": "consequencia",
+      "texto": "**Quinze anos depois.** Surgem manchas de ferrugem nas vigas da fachada. Os cloretos atravessaram um cobrimento fino e um concreto poroso, e a armadura começou a corroer. O aço corroído ocupa mais volume, empurra o concreto e o cobrimento se solta em placas. A recuperação custa caro e exige interditar varandas.",
+      "conceitos": ["nbr6118:classe-agressividade-ambiental", "nbr6118:cobrimento-nominal"],
+      "opcoes": [
+        { "texto": "Voltar e reavaliar o ambiente", "proxima": "ambiente" }
+      ]
+    },
+    "concreto": {
+      "tipo": "decisao",
+      "texto": "Com a classe definida, o próximo passo é especificar o concreto que vai à central.",
+      "pergunta": "Que concreto você especifica para a estrutura?",
+      "conceitos": ["nbr6118:qualidade-do-concreto"],
+      "opcoes": [
+        {
+          "texto": "C{{dado:durabilidade/qualidadeConcreto.armado.II.classeMin}}, com a/c ≤ {{dado:durabilidade/qualidadeConcreto.armado.II.relacaoAcMax}}",
+          "feedback": "Esses são os requisitos da classe II. Para o ambiente marinho a norma pede um concreto menos poroso.",
+          "proxima": "concreto"
+        },
+        {
+          "texto": "C{{dado:durabilidade/qualidadeConcreto.armado.III.classeMin}}, com a/c ≤ {{dado:durabilidade/qualidadeConcreto.armado.III.relacaoAcMax}}",
+          "correta": true,
+          "feedback": "Isso. A classe mínima e a relação a/c máxima andam juntas: é a relação a/c que controla a porosidade.",
+          "proxima": "cobrimento"
+        },
+        {
+          "texto": "C{{dado:durabilidade/qualidadeConcreto.armado.III.classeMin}}, com a/c ≤ {{dado:durabilidade/qualidadeConcreto.armado.II.relacaoAcMax}}",
+          "feedback": "A classe está certa, mas a relação a/c ficou a da classe II. Especificar só a resistência não garante um concreto pouco poroso; o limite de a/c precisa constar no projeto.",
+          "proxima": "concreto"
+        }
+      ]
+    },
+    "cobrimento": {
+      "tipo": "decisao",
+      "texto": "Agora o detalhamento. As vigas e os pilares serão executados com a tolerância de execução usual, Δc = {{dado:durabilidade/deltaC.padrao}}.",
+      "pergunta": "Qual cobrimento nominal você indica para vigas e pilares?",
+      "conceitos": ["nbr6118:cobrimento-nominal", "nbr6118:tolerancia-de-execucao"],
+      "opcoes": [
+        {
+          "texto": "{{dado:durabilidade/cobrimentoNominal.armado.viga-pilar.II}} mm",
+          "feedback": "Esse é o cobrimento de vigas e pilares na classe II.",
+          "proxima": "cobrimento"
+        },
+        {
+          "texto": "{{dado:durabilidade/cobrimentoNominal.armado.viga-pilar.III}} mm",
+          "correta": true,
+          "feedback": "Isso. Mais agressividade pede mais concreto entre o ambiente e o aço.",
+          "proxima": "controle"
+        },
+        {
+          "texto": "{{dado:durabilidade/cobrimentoNominal.armado.laje.III}} mm",
+          "feedback": "Esse é o valor de lajes na classe III. Vigas e pilares têm exigência própria.",
+          "proxima": "cobrimento"
+        }
+      ]
+    },
+    "controle": {
+      "tipo": "decisao",
+      "texto": "Na reunião de compatibilização, a construtora pede para reduzir o cobrimento das vigas. O argumento: ela tem um sistema de controle de qualidade rigoroso.",
+      "pergunta": "O que você responde?",
+      "conceitos": ["nbr6118:tolerancia-de-execucao"],
+      "opcoes": [
+        {
+          "texto": "Aceito sem condições: menos cobrimento é mais economia.",
+          "feedback": "A redução só é válida quando o controle rigoroso é exigido no projeto e comprovado na obra. Sem isso, você aceitou só a promessa.",
+          "proxima": "efeito-sem-controle"
+        },
+        {
+          "texto": "Aceito reduzir Δc para {{dado:durabilidade/deltaC.controleRigoroso}}, desde que o controle rigoroso esteja exigido no projeto e seja comprovado na execução.",
+          "correta": true,
+          "feedback": "Isso. O cobrimento mínimo continua o mesmo; o que diminui é a folga para os desvios da obra, e só porque esses desvios passam a ser medidos.",
+          "proxima": "fissuras"
+        },
+        {
+          "texto": "Recuso: o cobrimento da tabela nunca pode ser reduzido.",
+          "feedback": "A norma prevê a redução da tolerância de execução quando há controle rigoroso. Recusar sempre é seguro, mas desperdiça uma possibilidade legítima.",
+          "proxima": "controle"
+        }
+      ]
+    },
+    "efeito-sem-controle": {
+      "tipo": "consequencia",
+      "texto": "**Durante a obra.** Ninguém mediu a posição das armaduras. Os espaçadores eram de um tamanho só para tudo, e em vários trechos a armadura encostou na forma. Em parte das vigas o cobrimento real ficou abaixo do mínimo, exatamente no ambiente em que isso mais pesa.",
+      "conceitos": ["nbr6118:tolerancia-de-execucao"],
+      "opcoes": [
+        { "texto": "Voltar à reunião", "proxima": "controle" }
+      ]
+    },
+    "fissuras": {
+      "tipo": "decisao",
+      "texto": "Última verificação do detalhamento das vigas: a abertura de fissuras em serviço.",
+      "pergunta": "Que limite e que combinação de ações você usa?",
+      "conceitos": ["nbr6118:abertura-de-fissuras", "nbr6118:combinacoes-de-acoes"],
+      "opcoes": [
+        {
+          "texto": "w_k ≤ {{dado:durabilidade/aberturaFissuras.armado.III}} mm, com a combinação frequente",
+          "correta": true,
+          "feedback": "Isso. O limite segue a classe de agressividade, e a fissura é verificada com as cargas que acontecem com frequência.",
+          "proxima": "fim"
+        },
+        {
+          "texto": "w_k ≤ {{dado:durabilidade/aberturaFissuras.armado.I}} mm, com a combinação frequente",
+          "feedback": "Esse é o limite da classe I. Em ambiente marinho a fissura precisa ser mais fechada.",
+          "proxima": "fissuras"
+        },
+        {
+          "texto": "w_k ≤ {{dado:durabilidade/aberturaFissuras.armado.III}} mm, com a combinação última (ELU)",
+          "feedback": "O limite está certo, mas a combinação não. O ELU majora as cargas para verificar a ruptura; a fissuração é uma verificação de serviço.",
+          "proxima": "fissuras"
+        }
+      ]
+    },
+    "fim": {
+      "tipo": "fim",
+      "texto": "**Projeto entregue.** Ambiente marinho, concreto especificado pela classe e pela relação a/c, cobrimento de vigas da classe III, redução de Δc condicionada ao controle e fissuras verificadas em serviço. Cada decisão dependeu da primeira: errar o ambiente teria levado todas as outras junto."
+    }
+  }
+}

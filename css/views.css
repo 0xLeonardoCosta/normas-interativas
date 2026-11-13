@@ -1769,3 +1769,323 @@
     transition: none;
   }
 }
+
+/* --- Praticar: revisão espaçada e estudos de caso -------------------------------------------- */
+.nav-contador {
+  min-width: 18px;
+  height: 18px;
+  margin-left: 4px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--destaque);
+  color: var(--fundo);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 18px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.praticar {
+  width: min(48rem, 100% - 2 * var(--e-4));
+}
+
+.praticar-bloco {
+  margin-top: var(--e-6);
+}
+
+.praticar-bloco > h2 {
+  margin-bottom: var(--e-3);
+  font-size: var(--t-xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--texto-3);
+}
+
+.revisao-numeros {
+  margin-top: 0;
+}
+
+.revisao-acao {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--e-3) var(--e-4);
+  margin-top: var(--e-4);
+}
+
+.revisao-acao p,
+.revisao-vazia p,
+.revisao-volta {
+  font-size: var(--t-sm);
+  color: var(--texto-3);
+}
+
+.revisao-vazia {
+  display: grid;
+  justify-items: start;
+  gap: var(--e-3);
+  padding: var(--e-5);
+  border: 1px dashed var(--borda-forte);
+  border-radius: var(--raio-g);
+}
+
+.revisao-cartao .quiz-cabeca {
+  display: flex;
+  align-items: center;
+  gap: var(--e-3);
+}
+
+.revisao-barra {
+  flex: 1;
+  height: 4px;
+}
+
+.revisao-origem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: var(--e-3);
+  font-size: var(--t-xs);
+  font-weight: 500;
+  color: var(--texto-2);
+  text-decoration: none;
+}
+
+.revisao-origem i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--tema);
+}
+
+.revisao-origem:hover {
+  color: var(--texto);
+}
+
+.revisao-sair {
+  justify-self: start;
+  margin-top: var(--e-3);
+  border-color: transparent;
+  background: none;
+  color: var(--texto-3);
+}
+
+.casos-lista {
+  list-style: none;
+  display: grid;
+  gap: var(--e-3);
+  margin: 0;
+  padding: 0;
+}
+
+.caso-cartao {
+  position: relative;
+  display: grid;
+  gap: 6px;
+  padding: var(--e-5) calc(var(--e-5) + 24px) var(--e-5) var(--e-5);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio-g);
+  background: var(--superficie);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color var(--rapido), transform var(--medio) var(--mola);
+}
+
+.caso-cartao:hover {
+  border-color: var(--borda-forte);
+  transform: translateY(-2px);
+}
+
+.caso-cartao:active {
+  transform: scale(0.99);
+}
+
+.caso-cartao-topo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--e-2);
+}
+
+.caso-cartao h3 {
+  font-size: var(--t-base);
+  font-weight: 600;
+}
+
+.caso-cartao p {
+  color: var(--texto-2);
+  font-size: var(--t-sm);
+}
+
+.caso-cartao small {
+  color: var(--texto-3);
+  font-size: var(--t-xs);
+}
+
+.caso-cartao > .icone {
+  position: absolute;
+  right: var(--e-5);
+  top: 50%;
+  translate: 0 -50%;
+  color: var(--texto-3);
+  transition: transform var(--medio) var(--mola);
+}
+
+.caso-cartao:hover > .icone {
+  transform: translateX(3px);
+}
+
+/* Página do caso */
+.caso {
+  width: min(44rem, 100% - 2 * var(--e-4));
+}
+
+.caso-sobretitulo {
+  display: flex;
+  align-items: center;
+  gap: var(--e-2);
+  font-size: var(--t-xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--texto-3);
+}
+
+.caso-contexto {
+  margin-top: var(--e-4);
+  padding: var(--e-5);
+  border-left: 3px solid var(--destaque);
+  border-radius: 0 var(--raio) var(--raio) 0;
+  background: var(--superficie);
+}
+
+.caso-trilha {
+  list-style: none;
+  display: grid;
+  gap: var(--e-2);
+  margin: var(--e-5) 0 0;
+  padding: 0;
+}
+
+.caso-trilha:empty {
+  display: none;
+}
+
+.caso-passo {
+  display: grid;
+  gap: 2px;
+  padding: var(--e-2) var(--e-4);
+  border-left: 2px solid var(--borda-forte);
+  font-size: var(--t-sm);
+  animation: caso-entra var(--medio) var(--mola);
+}
+
+.caso-passo-pergunta {
+  color: var(--texto-3);
+}
+
+.caso-passo-escolha {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+}
+
+.caso-passo-escolha .icone {
+  flex: none;
+  color: var(--ok);
+}
+
+.caso-passo small {
+  color: var(--texto-3);
+}
+
+.caso-palco {
+  margin-top: var(--e-5);
+}
+
+.caso-etapa {
+  display: grid;
+  gap: var(--e-4);
+  padding: var(--e-5);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio-g);
+  background: var(--superficie);
+  animation: caso-entra var(--medio) var(--mola);
+}
+
+.caso-consequencia {
+  border-color: color-mix(in oklab, var(--erro) 45%, var(--borda));
+  background: color-mix(in oklab, var(--erro) 6%, var(--superficie));
+}
+
+.caso-rotulo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--t-xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--texto-3);
+}
+
+.caso-consequencia .caso-rotulo {
+  color: var(--erro);
+}
+
+.caso-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--e-2);
+}
+
+.caso-revisar {
+  display: grid;
+  gap: 6px;
+  padding-top: var(--e-3);
+  border-top: 1px solid var(--borda);
+}
+
+.caso-revisar > span {
+  font-size: var(--t-xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--texto-3);
+}
+
+.caso-etapa .quiz-opcao .selo,
+.caso-passo .selo {
+  margin-left: 4px;
+}
+
+@keyframes caso-entra {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@media (max-width: 720px) {
+  .nav-contador {
+    position: absolute;
+    top: 2px;
+    left: calc(50% + 6px);
+    margin: 0;
+  }
+
+  .caso-contexto,
+  .caso-etapa {
+    padding: var(--e-4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .caso-passo,
+  .caso-etapa {
+    animation: none;
+  }
+}
