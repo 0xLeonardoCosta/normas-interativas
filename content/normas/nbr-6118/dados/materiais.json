@@ -4,7 +4,7 @@
 
   "classes": {
     "referencia": "NBR 6118:2023, item 8.2.1",
-    "pendenteValidacao": true,
+    "pendenteValidacao": false,
     "unidade": "MPa",
     "fckMin": 20,
     "limiteGrupoI": 50,
@@ -13,7 +13,7 @@
 
   "resistenciaTracao": {
     "referencia": "NBR 6118:2023, item 8.2.5",
-    "pendenteValidacao": true,
+    "pendenteValidacao": false,
     "grupoI": { "coeficiente": 0.3, "expoente": [2, 3] },
     "grupoII": { "coeficiente": 2.12, "fatorFck": 0.11 },
     "fatorInferior": { "valor": 0.7 },
@@ -22,7 +22,7 @@
 
   "moduloElasticidade": {
     "referencia": "NBR 6118:2023, item 8.2.8",
-    "pendenteValidacao": true,
+    "pendenteValidacao": false,
     "unidade": "MPa",
     "grupoI": { "coeficiente": 5600 },
     "grupoII": { "coeficiente": 21500, "divisorFck": 10, "parcela": 1.25, "expoente": [1, 3] },
@@ -37,7 +37,7 @@
 
   "coeficientesPonderacao": {
     "referencia": "NBR 6118:2023, Tabela 12.1",
-    "pendenteValidacao": true,
+    "pendenteValidacao": false,
     "observacao": "Combinações normais, estado-limite último.",
     "gamaC": { "valor": 1.4 },
     "gamaS": { "valor": 1.15 }
@@ -45,12 +45,19 @@
 
   "acos": {
     "referencia": "NBR 6118:2023, item 8.3 e Tabela 8.3",
-    "pendenteValidacao": true,
+    "pendenteValidacao": false,
     "unidade": "MPa",
     "itens": [
       { "id": "CA-25", "fyk": 250, "superficie": "lisa" },
       { "id": "CA-50", "fyk": 500, "superficie": "nervurada" },
       { "id": "CA-60", "fyk": 600, "superficie": "entalhada" }
     ]
+  },
+
+  "moduloAco": {
+    "referencia": "NBR 6118:2023, item 8.3.5",
+    "pendenteValidacao": true,
+    "valor": 210000,
+    "unidade": "MPa"
   }
 }

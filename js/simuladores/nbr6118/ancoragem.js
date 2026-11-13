@@ -5,7 +5,7 @@ import { criarMola } from '../../ui/motion.js';
 import { carregarDados } from '../../content/loader.js';
 import { tracaoDeCalculo, escoamentoDeCalculo, categoriaDeAco } from '../../calc/nbr6118/materiais.js';
 import { resistenciaAderencia, comprimentoBasico, comprimentoNecessario } from '../../calc/nbr6118/ancoragem.js';
-import { novoUid, grupo, deslizante, alternador, criarPaineis, legendaSelo } from '../controles.js';
+import { novoUid, grupo, deslizante, alternador, criarPaineis } from '../controles.js';
 
 // Bitolas comerciais usuais (mm). Não são valores normativos desta norma: servem só ao desenho.
 const BARRAS = [8, 10, 12.5, 16, 20, 25, 32];
@@ -134,7 +134,7 @@ export async function montar(container) {
     h('div', { class: 'simulador' },
       controles,
       h('div', { class: 'sim-palco' }, desenho, nota),
-      h('div', { class: 'sim-saida' }, paineis.el, legendaSelo()),
+      h('div', { class: 'sim-saida' }, paineis.el, paineis.legenda),
     ),
   );
   atualizar();

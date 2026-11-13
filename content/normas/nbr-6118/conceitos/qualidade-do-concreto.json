@@ -71,5 +71,5 @@
   ],
   "pareto": { "importancia": 5, "frequencia": 4, "dificuldade": 2, "tempoEstudoMin": 10 },
   "tags": ["a/c", "fck", "porosidade", "permeabilidade", "classe de resistência"],
-  "status": "rascunho"
+  "status": "revisado"
 }

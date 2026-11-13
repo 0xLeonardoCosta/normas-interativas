@@ -4,7 +4,7 @@
 
   "classesAgressividade": {
     "referencia": "NBR 6118:2023, Tabela 6.1",
-    "pendenteValidacao": true,
+    "pendenteValidacao": false,
     "itens": [
       { "id": "I", "agressividade": "Fraca", "risco": "Insignificante", "ambientes": ["Rural", "Submersa"] },
       { "id": "II", "agressividade": "Moderada", "risco": "Pequeno", "ambientes": ["Urbana"] },
@@ -21,7 +21,7 @@
 
   "qualidadeConcreto": {
     "referencia": "NBR 6118:2023, Tabela 7.1",
-    "pendenteValidacao": true,
+    "pendenteValidacao": false,
     "armado": {
       "I": { "relacaoAcMax": 0.65, "classeMin": 20 },
       "II": { "relacaoAcMax": 0.60, "classeMin": 25 },
@@ -32,7 +32,7 @@
 
   "cobrimentoNominal": {
     "referencia": "NBR 6118:2023, Tabela 7.2",
-    "pendenteValidacao": true,
+    "pendenteValidacao": false,
     "unidade": "mm",
     "deltaCDaTabela": 10,
     "armado": {
@@ -47,19 +47,19 @@
       "valor": 10,
       "unidade": "mm",
       "referencia": "NBR 6118:2023, item 7.4.7.3",
-      "pendenteValidacao": true
+      "pendenteValidacao": false
     },
     "controleRigoroso": {
       "valor": 5,
       "unidade": "mm",
       "referencia": "NBR 6118:2023, item 7.4.7.4",
-      "pendenteValidacao": true
+      "pendenteValidacao": false
     }
   },
 
   "aberturaFissuras": {
     "referencia": "NBR 6118:2023, Tabela 13.4",
-    "pendenteValidacao": true,
+    "pendenteValidacao": false,
     "unidade": "mm",
     "armado": { "I": 0.4, "II": 0.3, "III": 0.3, "IV": 0.2 }
   }

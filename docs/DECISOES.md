@@ -129,3 +129,21 @@ Registro das decisões relevantes: o quê, por quê e o que foi descartado. As m
 ## 18. Scripts Node rodados com Bun nesta máquina
 
 `tools/test.js` e `tools/build-index.js` usam só APIs do Node e rodam igual com `bun`. O GitHub Actions continua usando Node 22.
+
+## 19. Combinações de ações: motor genérico, regras como dados
+
+**O quê:** `js/calc/comum/combinacoes.js` combina ações de qualquer norma de forma linear. Cada combinação é descrita em `dados/acoes.json` como a lista de coeficientes que multiplicam cada papel (permanentes, variável principal, variáveis secundárias); cada variável é tentada como principal e vale o maior resultado. O simulador `js/simuladores/comum/combinacoes.js` é registrado por norma com `paraNorma('<id>')`.
+
+**Por quê:** o responsável técnico quer reaproveitar o simulador nas próximas normas (o projeto caminha para um "livro" de mapas mentais com várias normas). NBR 6118/8681, Eurocode e ACI combinam ações como somas de produtos de coeficientes; muda só a tabela. Isso abre uma exceção à decisão 14: aqui a regra de combinação também é dado, porque é ela que varia entre normas.
+
+**Descartado:** um simulador por norma (duplicaria a interface) e uma linguagem de fórmulas genérica em JSON (complexa demais para o ganho).
+
+## 20. Fissuração calculada a partir do momento e da seção
+
+**O quê:** o simulador de abertura de fissuras calcula a linha neutra e a tensão no aço no estádio II a partir do momento em serviço (combinação frequente) e da seção retangular, só para concreto armado, como pedido pelo responsável técnico. Avalia a barra de canto e uma interna e mostra a maior abertura, com as duas expressões da norma e a que governa.
+
+**Simplificações declaradas:** uma camada de barras iguais, CA-50, sem verificação do momento de fissuração. A regra da área de envolvimento está em `docs/TODO-NORMA.md` como dúvida.
+
+## 21. Pontos fora do app: decisão delegada
+
+O responsável técnico pediu que eu decidisse item a item. Critério: entra o que é verificação geométrica direta e cabe no simulador existente sem novas hipóteses de engenharia (cobrimento x barra, cobrimento x brita, espaçamento mínimo). Fica fora o que depende de exceções da norma, de outra norma ainda ausente ou de um conceito que ainda não existe. A lista com o motivo de cada um está em `docs/TODO-NORMA.md`, seção 3.

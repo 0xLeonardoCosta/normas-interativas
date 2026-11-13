@@ -3,7 +3,7 @@
   "nome": "NBR 6118",
   "titulo": "Projeto de estruturas de concreto",
   "versao": "2023",
-  "dados": ["durabilidade", "materiais", "ancoragem"],
+  "dados": ["durabilidade", "materiais", "ancoragem", "acoes", "fissuracao", "detalhamento"],
   "temas": [
     {
       "id": "concreto",

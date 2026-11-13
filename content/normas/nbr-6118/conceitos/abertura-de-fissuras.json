@@ -25,6 +25,13 @@
     { "rotulo": "CAA III: abertura máxima w_k (concreto armado)", "dado": "durabilidade/aberturaFissuras.armado.III", "unidade": "mm" },
     { "rotulo": "CAA IV: abertura máxima w_k (concreto armado)", "dado": "durabilidade/aberturaFissuras.armado.IV", "unidade": "mm" }
   ],
+  "simuladores": ["nbr6118:fissuracao"],
+  "exemplos": [
+    {
+      "titulo": "Mesma área de aço, bitolas diferentes",
+      "texto": "No simulador, compare 2 barras de 20 mm com 5 barras de 12,5 mm (áreas quase iguais). A tensão no aço praticamente não muda, mas a abertura estimada cai: as barras finas têm mais superfície de aderência e controlam melhor a fissura."
+    }
+  ],
   "checklist": [
     "Limite de abertura definido conforme a classe de agressividade.",
     "Verificação feita com a combinação de serviço indicada pela norma.",
@@ -68,13 +75,16 @@
   "referencias": [
     { "item": "NBR 6118:2023, item 13.4", "descricao": "Controle da fissuração e proteção das armaduras." },
     { "item": "NBR 6118:2023, item 13.4.2 e Tabela 13.4", "descricao": "Limites de abertura de fissuras por classe de agressividade e tipo de concreto." },
-    { "item": "NBR 6118:2023, item 17.3.3", "descricao": "Verificação do estado-limite de abertura de fissuras." }
+    { "item": "NBR 6118:2023, item 17.3.3", "descricao": "Verificação do estado-limite de abertura de fissuras." },
+    { "item": "NBR 6118:2023, item 17.3.3.2", "descricao": "Estimativa da abertura de fissuras a partir da tensão na armadura no estádio II." }
   ],
   "conexoes": [
     { "alvo": "nbr6118:classe-agressividade-ambiental", "tipo": "depende-de" },
-    { "alvo": "nbr6118:cobrimento-nominal", "tipo": "relacionado" }
+    { "alvo": "nbr6118:cobrimento-nominal", "tipo": "relacionado" },
+    { "alvo": "nbr6118:combinacoes-de-acoes", "tipo": "depende-de" },
+    { "alvo": "nbr6118:aderencia-aco-concreto", "tipo": "depende-de" }
   ],
   "pareto": { "importancia": 4, "frequencia": 3, "dificuldade": 4, "tempoEstudoMin": 20 },
   "tags": ["fissuração", "w_k", "ELS-W", "serviço"],
-  "status": "rascunho"
+  "status": "revisado"
 }
