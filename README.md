@@ -102,6 +102,13 @@ Observação: nesta fase a home mostra o mapa da primeira norma disponível do c
 - Simulador: crie o módulo em `js/simuladores/<norma>/`, exportando `montar(container)` que devolve uma função de limpeza, e registre o id em `js/registry.js`. Depois cite o id em `simuladores[]` do conceito.
 - Fluxograma: crie o JSON em `content/normas/<pasta>/fluxogramas/` (nós `pergunta` com opções e um nó `resultado` com um `resolvedor` registrado) e cite o id no campo `fluxograma` do conceito.
 
+## Como adicionar um estudo de caso
+
+1. Crie `content/normas/<pasta>/casos/<slug>.json` com `id` (`<norma>:<slug>`), `titulo`, `resumo`, `contexto`, `status`, `conceitos[]`, `inicio` e `etapas`. O formato completo está comentado em `js/estudo/casos.js`.
+2. Cada etapa é uma `decisao` (pergunta, opções com exatamente uma `correta`, `feedback` e `proxima`), uma `consequencia` (o que acontece depois de uma escolha errada, com opção de voltar) ou o `fim`.
+3. Números da norma não vão no texto: use `{{dado:arquivo/caminho}}`, que puxa o valor do arquivo de dados e mostra o selo enquanto ele estiver em validação.
+4. Liste o slug no campo `casos` de `norma.json` e rode os testes; o validador acusa destinos inexistentes, caminhos sem fim e dados que não existem.
+
 ## Telas
 
 | Rota | Tela |
@@ -110,6 +117,8 @@ Observação: nesta fase a home mostra o mapa da primeira norma disponível do c
 | `#/pareto` | Os 20%: conceitos por ordem de retorno |
 | `#/grafo` | Grafo de conceitos, com filtros por tema, status e prioridade |
 | `#/progresso` | Progresso geral e por tema |
+| `#/praticar` | Revisão espaçada das perguntas e lista de estudos de caso |
+| `#/caso/<id>` | Estudo de caso com decisões ramificadas |
 | `#/conceito/<id>` | Página de um conceito |
 
 ## Atalhos

@@ -58,6 +58,8 @@ export const store = criarStore(
       lidos: {}, // { [idConceito]: timestamp }
       quiz: {}, // { [idConceito]: { acertos, total } }
       checklist: {}, // { [idConceito]: [índices marcados] }
+      revisao: {}, // { [idConceito#índice]: { caixa, proxima, acertos, erros } } (js/estudo/revisao.js)
+      casos: {}, // { [idCaso]: { concluido, acertos, total } }
     },
     mapa: { expandidos: null, vista: null }, // só em memória
   },
@@ -92,8 +94,21 @@ export const acoes = {
       return { ...e, progresso: { ...e.progresso, checklist } };
     });
   },
+  /** Grava o novo estado de um cartão de revisão (calculado por js/estudo/revisao.js). */
+  gravarCartao(id, estadoCartao) {
+    store.set((e) => ({
+      ...e,
+      progresso: { ...e.progresso, revisao: { ...e.progresso.revisao, [id]: estadoCartao } },
+    }));
+  },
+  concluirCaso(id, acertos, total) {
+    store.set((e) => ({
+      ...e,
+      progresso: { ...e.progresso, casos: { ...e.progresso.casos, [id]: { concluido: Date.now(), acertos, total } } },
+    }));
+  },
   limparProgresso() {
-    store.set((e) => ({ ...e, progresso: { lidos: {}, quiz: {}, checklist: {} } }));
+    store.set((e) => ({ ...e, progresso: { lidos: {}, quiz: {}, checklist: {}, revisao: {}, casos: {} } }));
   },
   lembrarMapa(mapa) {
     store.set((e) => ({ ...e, mapa: { ...e.mapa, ...mapa } }));

@@ -90,3 +90,17 @@ export async function carregarFluxograma(id) {
   if (!partes) throw new Error(`Id inválido: ${id}`);
   return lerJSON(`normas/${await pastaDe(partes.norma)}/fluxogramas/${partes.slug}.json`);
 }
+
+export async function carregarCaso(id) {
+  const partes = partesDoId(id);
+  if (!partes) throw new Error(`Id inválido: ${id}`);
+  return lerJSON(`normas/${await pastaDe(partes.norma)}/casos/${partes.slug}.json`);
+}
+
+/** Todos os arquivos de dados de uma norma, como { nome: conteúdo } (para resolverDado). */
+export async function carregarTodosOsDados(normaId) {
+  const norma = (await carregarBiblioteca()).normas.get(normaId);
+  const nomes = norma?.dados || [];
+  const conteudos = await Promise.all(nomes.map((n) => carregarDados(normaId, n)));
+  return Object.fromEntries(nomes.map((n, i) => [n, conteudos[i]]));
+}

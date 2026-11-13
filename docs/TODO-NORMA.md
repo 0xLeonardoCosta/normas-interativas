@@ -170,3 +170,4 @@ Novos, pendentes:
 - [ ] Conceito **Combinações de ações** (`content/normas/nbr-6118/conceitos/combinacoes-de-acoes.json`), inclusive as notas de Pareto.
 - [ ] Exemplo novo em **Limites de abertura de fissuras** ("Mesma área de aço, bitolas diferentes") e o simulador de fissuração.
 - [ ] Textos de aviso dos simuladores de cobrimento (brita e espaçamento) e de fissuração.
+- [ ] Estudo de caso **Edifício residencial de frente para o mar** (`content/normas/nbr-6118/casos/edificio-no-litoral.json`): enquadramento como ambiente marinho pela exposição à névoa salina, as opções erradas, os feedbacks e as duas consequências narradas. Os números vêm dos dados já validados.

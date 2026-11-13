@@ -147,3 +147,19 @@ Registro das decisões relevantes: o quê, por quê e o que foi descartado. As m
 ## 21. Pontos fora do app: decisão delegada
 
 O responsável técnico pediu que eu decidisse item a item. Critério: entra o que é verificação geométrica direta e cabe no simulador existente sem novas hipóteses de engenharia (cobrimento x barra, cobrimento x brita, espaçamento mínimo). Fica fora o que depende de exceções da norma, de outra norma ainda ausente ou de um conceito que ainda não existe. A lista com o motivo de cada um está em `docs/TODO-NORMA.md`, seção 3.
+
+## 22. Revisão espaçada
+
+**O quê:** as perguntas de quiz viram cartões (`<conceito>#<índice>`) revisados pelo sistema de caixas de Leitner, em `js/estudo/revisao.js`. Acerto sobe uma caixa (próxima revisão em 1, 3, 7, 16 e 35 dias); erro volta à primeira caixa e repete o cartão no fim da mesma sessão. Entram só as perguntas de conceitos lidos ou com quiz respondido; as novas entram em lotes de até 5, por ordem de Pareto. O link "Praticar" mostra quantas revisões estão vencidas.
+
+**Por quê:** Leitner é previsível e fácil de explicar ao usuário, e não precisa de nota de dificuldade a cada resposta, o que manteria o fluxo de um toque por pergunta.
+
+**Descartado:** SM-2 (pede autoavaliação de 0 a 5 a cada cartão) e incluir conceitos não lidos (revisar o que nunca foi estudado vira chute).
+
+## 23. Estudos de caso ramificados
+
+**O quê:** casos em `content/normas/<pasta>/casos/`, listados em `norma.json` (`casos`). Cada caso é um grafo de etapas: decisões com uma opção correta e retorno para cada escolha, consequências narradas para os erros mais instrutivos e uma etapa final com a nota de acertos na primeira tentativa. Os números citados vêm dos arquivos de dados por `{{dado:...}}`, então o caso nunca diverge do que foi validado. Rotas `#/praticar` e `#/caso/<id>`.
+
+**Por quê:** é o formato da Fase 3 ("Você está projetando..."), e a ramificação mostra o custo de uma decisão errada, que um quiz comum não mostra.
+
+**Descartado:** pontuação por tempo ou vidas (gamificação infantil, contra a seção 5 do CLAUDE.md) e caminhos com várias respostas aceitáveis (ficam para quando houver casos que precisem disso).

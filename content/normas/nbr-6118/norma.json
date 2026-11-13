@@ -4,6 +4,7 @@
   "titulo": "Projeto de estruturas de concreto",
   "versao": "2023",
   "dados": ["durabilidade", "materiais", "ancoragem", "acoes", "fissuracao", "detalhamento"],
+  "casos": ["edificio-no-litoral"],
   "temas": [
     {
       "id": "concreto",

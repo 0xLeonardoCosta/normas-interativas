@@ -4,6 +4,7 @@ import { criarRoteador } from './router.js';
 import { carregarBiblioteca, preCarregarConceito } from './content/loader.js';
 import { iconeHTML } from './ui/icons.js';
 import { aquecerFormulas } from './content/markdown.js';
+import { contarVencidos } from './estudo/revisao.js';
 
 for (const el of document.querySelectorAll('[data-icone]')) el.outerHTML = iconeHTML(el.dataset.icone, 16);
 
@@ -32,6 +33,18 @@ export function alternarTema() {
 }
 botaoTema.addEventListener('click', alternarTema);
 
+// --- Contador de revisões vencidas no link "Praticar" ---------------------------------------------
+const contador = document.querySelector('[data-contador="revisao"]');
+function atualizarContador() {
+  const n = contarVencidos(store.get().progresso.revisao, Date.now());
+  contador.textContent = n > 99 ? '99+' : String(n);
+  contador.hidden = n === 0;
+  contador.closest('a').setAttribute('aria-label', n ? `Praticar, ${n} ${n === 1 ? 'revisão pendente' : 'revisões pendentes'}` : 'Praticar');
+}
+atualizarContador();
+store.assinar((novo, antigo) => novo.progresso.revisao !== antigo.progresso.revisao && atualizarContador());
+setInterval(atualizarContador, 60000);
+
 // --- Rotas --------------------------------------------------------------------------------------
 const saida = document.getElementById('conteudo');
 const roteador = criarRoteador({
@@ -41,6 +54,8 @@ const roteador = criarRoteador({
     { nome: 'pareto', padrao: /^\/pareto$/, carregar: () => import('./ui/views/pareto.js') },
     { nome: 'grafo', padrao: /^\/grafo$/, carregar: () => import('./ui/views/grafo.js') },
     { nome: 'progresso', padrao: /^\/progresso$/, carregar: () => import('./ui/views/progresso.js') },
+    { nome: 'praticar', padrao: /^\/praticar$/, carregar: () => import('./ui/views/praticar.js') },
+    { nome: 'praticar', padrao: /^\/caso\/([a-z0-9]+:[a-z0-9-]+)$/, carregar: () => import('./ui/views/caso.js') },
     { nome: 'conceito', padrao: /^\/conceito\/([a-z0-9]+:[a-z0-9-]+)$/, carregar: () => import('./ui/views/conceito.js') },
   ],
   naoEncontrada: { nome: 'nao-encontrada', carregar: () => import('./ui/views/nao-encontrado.js') },
