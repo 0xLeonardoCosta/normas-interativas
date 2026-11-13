@@ -86,5 +86,5 @@
   ],
   "pareto": { "importancia": 5, "frequencia": 5, "dificuldade": 2, "tempoEstudoMin": 15 },
   "tags": ["fck", "fcd", "fctm", "fctk", "módulo de elasticidade", "Eci", "Ecs", "tração", "agregado"],
-  "status": "rascunho"
+  "status": "revisado"
 }

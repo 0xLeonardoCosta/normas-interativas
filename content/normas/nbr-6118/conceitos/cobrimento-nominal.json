@@ -85,5 +85,5 @@
   ],
   "pareto": { "importancia": 5, "frequencia": 5, "dificuldade": 2, "tempoEstudoMin": 15 },
   "tags": ["cobrimento", "c_nom", "espaçador", "altura útil", "estribo"],
-  "status": "rascunho"
+  "status": "revisado"
 }

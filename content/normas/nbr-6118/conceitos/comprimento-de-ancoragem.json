@@ -91,5 +91,5 @@
   ],
   "pareto": { "importancia": 5, "frequencia": 5, "dificuldade": 3, "tempoEstudoMin": 20 },
   "tags": ["ancoragem", "lb", "lb,nec", "gancho", "traspasse", "decalagem", "apoio"],
-  "status": "rascunho"
+  "status": "revisado"
 }

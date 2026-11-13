@@ -52,5 +52,12 @@
       { "id": "CA-50", "fyk": 500, "superficie": "nervurada" },
       { "id": "CA-60", "fyk": 600, "superficie": "entalhada" }
     ]
+  },
+
+  "moduloAco": {
+    "referencia": "NBR 6118:2023, item 8.3.5",
+    "pendenteValidacao": true,
+    "valor": 210000,
+    "unidade": "MPa"
   }
 }

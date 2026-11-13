@@ -1,0 +1,27 @@
+{
+  "id": "detalhamento",
+  "observacao": "Fonte única de exigências geométricas de detalhamento ligadas ao cobrimento e ao espaçamento das barras. Todo bloco com pendenteValidacao=true ainda não foi conferido com a norma pelo responsável técnico. Ao validar, troque para false e atualize docs/TODO-NORMA.md.",
+
+  "cobrimentoEBarra": {
+    "referencia": "NBR 6118:2023, item 7.4.7.5",
+    "pendenteValidacao": true,
+    "observacao": "O cobrimento nominal de uma barra não pode ser menor que este múltiplo do seu diâmetro (barra isolada).",
+    "fatorDiametro": { "valor": 1.0 }
+  },
+
+  "cobrimentoEAgregado": {
+    "referencia": "NBR 6118:2023, item 7.4.7.6",
+    "pendenteValidacao": true,
+    "observacao": "A dimensão máxima do agregado graúdo não pode passar deste múltiplo do cobrimento nominal.",
+    "fatorCobrimento": { "valor": 1.2 }
+  },
+
+  "espacamentoHorizontal": {
+    "referencia": "NBR 6118:2023, item 18.3.2.2",
+    "pendenteValidacao": true,
+    "observacao": "Espaço livre mínimo entre barras de uma mesma camada, medido entre faces: o maior dos três.",
+    "absoluto": { "valor": 20, "unidade": "mm" },
+    "fatorDiametro": { "valor": 1.0 },
+    "fatorAgregado": { "valor": 1.2 }
+  }
+}

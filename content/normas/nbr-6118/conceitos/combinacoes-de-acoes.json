@@ -1,0 +1,93 @@
+{
+  "id": "nbr6118:combinacoes-de-acoes",
+  "norma": "nbr6118",
+  "versao": "2023",
+  "tema": "estados-limites",
+  "titulo": "Combinações de ações",
+  "resumo": "As mesmas cargas entram com pesos diferentes em cada verificação. No estado-limite último elas são majoradas, porque a pergunta é se a estrutura rompe; em serviço entram só as parcelas que de fato acontecem com frequência ou por longos períodos.",
+  "oQueE": "Uma **combinação de ações** é a regra que soma as cargas atuantes para uma verificação específica. Cada ação entra multiplicada por coeficientes:\n\n- $\\gamma_f$ (**ponderação**) majora as ações no estado-limite último, cobrindo incertezas sobre o valor das cargas e sobre o modelo de cálculo;\n- $\\psi_0$, $\\psi_1$ e $\\psi_2$ (**fatores de combinação e de redução**) dizem que parte de uma carga variável costuma estar presente junto com as outras, com frequência ou de forma quase permanente.\n\nPara uma carga permanente $g$ e uma variável $q$, as três combinações mais usadas ficam:\n\n$$p_{ELU} = \\gamma_g \\, g + \\gamma_q \\, q$$\n\n$$p_{freq} = g + \\psi_1 \\, q \\qquad p_{qp} = g + \\psi_2 \\, q$$\n\nCom mais de uma carga variável, cada uma é tentada como principal e as demais entram reduzidas; vale a combinação mais desfavorável.",
+  "porQueExiste": "Uma viga de escritório raramente recebe, ao mesmo tempo, a carga de uso máxima prevista em todos os ambientes. Mas se receber, não pode romper. Por isso a mesma carga é tratada de dois jeitos.\n\nNa **segurança** (ELU) o projeto se protege do improvável: as cargas são majoradas e somadas no seu pior arranjo. Errar para menos aqui significa colapso.\n\nNo **serviço** (ELS) a pergunta muda para o que o usuário vai ver no dia a dia. Uma fissura se abre e se fecha com cargas que acontecem muitas vezes; por isso a fissuração usa a combinação **frequente**. A flecha cresce com o tempo por fluência, e isso depende da carga que fica lá por anos; por isso as flechas usam a combinação **quase permanente**. Usar a carga do ELU nessas verificações superdimensionaria a estrutura sem motivo.\n\nOs fatores $\\psi$ crescem com o tempo que a carga costuma ficar: em uma biblioteca, os livros estão sempre lá; em uma residência, a lotação máxima é rara.",
+  "ondeSeAplica": [
+    "Dimensionamento de qualquer elemento no estado-limite último",
+    "Verificação de abertura de fissuras (combinação frequente)",
+    "Verificação de flechas e efeitos de longa duração (combinação quase permanente)",
+    "Escolha dos esforços de entrada em programas de cálculo"
+  ],
+  "quandoUsar": "Sempre que for verificar um estado-limite. Primeiro defina qual estado está sendo verificado; a combinação vem daí, e não o contrário. As cargas características (peso próprio, revestimentos, cargas de uso) vêm de normas de ações, como a NBR 6120.",
+  "errosComuns": [
+    "Usar a carga majorada do ELU na verificação de fissuras ou de flechas.",
+    "Verificar flechas com a combinação frequente, ignorando que a fluência depende da carga de longa duração.",
+    "Aplicar o mesmo ψ a qualquer carga variável, sem olhar o tipo de uso do ambiente.",
+    "Esquecer de testar cada carga variável como principal quando há mais de uma."
+  ],
+  "valores": [
+    { "rotulo": "γg: ponderação das ações permanentes (combinação normal)", "dado": "acoes/ponderacao.permanente" },
+    { "rotulo": "γq: ponderação das ações variáveis (combinação normal)", "dado": "acoes/ponderacao.variavel" },
+    { "rotulo": "Uso residencial: ψ0", "dado": "acoes/fatoresDeCombinacao.itens.0.psi0" },
+    { "rotulo": "Uso residencial: ψ1", "dado": "acoes/fatoresDeCombinacao.itens.0.psi1" },
+    { "rotulo": "Uso residencial: ψ2", "dado": "acoes/fatoresDeCombinacao.itens.0.psi2" }
+  ],
+  "simuladores": ["nbr6118:combinacoes"],
+  "exemplos": [
+    {
+      "titulo": "A mesma viga, três cargas",
+      "texto": "No simulador, deixe $g$ fixo e aumente $q$. A barra do ELU cresce depressa, porque $q$ entra majorado; a quase permanente quase não se mexe, porque só uma pequena fração de $q$ fica por longos períodos. Troque o uso para biblioteca e veja as barras de serviço se aproximarem da carga característica."
+    }
+  ],
+  "checklist": [
+    "O estado-limite verificado está identificado antes da escolha da combinação.",
+    "As cargas características vêm de uma norma de ações e estão documentadas.",
+    "Os fatores ψ correspondem ao uso real de cada ambiente.",
+    "Com mais de uma ação variável, cada uma foi testada como principal.",
+    "Fissuração com a combinação frequente, flechas com a quase permanente."
+  ],
+  "quiz": [
+    {
+      "pergunta": "Qual combinação é usada na verificação de abertura de fissuras em concreto armado?",
+      "opcoes": [
+        "A combinação última normal",
+        "A combinação frequente",
+        "A combinação quase permanente",
+        "A carga característica sem combinação"
+      ],
+      "correta": 1,
+      "explicacao": "A fissura abre e fecha com cargas que acontecem muitas vezes ao longo da vida da estrutura. É isso que a combinação frequente representa."
+    },
+    {
+      "pergunta": "Por que as flechas de longo prazo usam a combinação quase permanente?",
+      "opcoes": [
+        "Porque é a mais desfavorável",
+        "Porque a fluência depende da carga que permanece aplicada por muito tempo",
+        "Porque a norma proíbe majorar cargas em serviço",
+        "Porque o concreto é mais rígido em serviço"
+      ],
+      "correta": 1,
+      "explicacao": "A deformação lenta do concreto cresce com o tempo sob carga. O que importa é a parcela que fica lá por anos, e não picos ocasionais."
+    },
+    {
+      "pergunta": "Mantidas as cargas, o que acontece com a carga quase permanente ao trocar o uso de residência para biblioteca?",
+      "opcoes": [
+        "Diminui",
+        "Fica igual",
+        "Aumenta, porque o ψ2 da biblioteca é maior",
+        "Passa a ser igual à do ELU"
+      ],
+      "correta": 2,
+      "explicacao": "Em uma biblioteca a carga de uso fica presente quase o tempo todo, por isso o fator de longa duração é maior."
+    }
+  ],
+  "referencias": [
+    { "item": "NBR 6118:2023, item 11.7 e Tabela 11.1", "descricao": "Coeficientes de ponderação das ações." },
+    { "item": "NBR 6118:2023, Tabela 11.2", "descricao": "Fatores de combinação e de redução das ações variáveis." },
+    { "item": "NBR 6118:2023, item 11.8.2", "descricao": "Combinações últimas." },
+    { "item": "NBR 6118:2023, item 11.8.3", "descricao": "Combinações de serviço." }
+  ],
+  "conexoes": [
+    { "alvo": "nbr6118:abertura-de-fissuras", "tipo": "influencia" },
+    { "alvo": "nbr6118:propriedades-do-concreto", "tipo": "relacionado" },
+    { "alvo": "nbr6120:cargas-de-uso", "tipo": "depende-de" }
+  ],
+  "pareto": { "importancia": 5, "frequencia": 5, "dificuldade": 2, "tempoEstudoMin": 15 },
+  "tags": ["combinações", "ELU", "ELS", "γf", "ψ0", "ψ1", "ψ2", "frequente", "quase permanente"],
+  "status": "rascunho"
+}

@@ -63,5 +63,5 @@
   ],
   "pareto": { "importancia": 3, "frequencia": 4, "dificuldade": 1, "tempoEstudoMin": 5 },
   "tags": ["Δc", "delta c", "tolerância", "controle de qualidade", "pré-moldado"],
-  "status": "rascunho"
+  "status": "revisado"
 }

@@ -7,7 +7,7 @@
       "tema": "concreto",
       "titulo": "fck e as propriedades do concreto",
       "resumo": "O projeto especifica um número só, o fck. Dele a norma permite estimar as outras propriedades usadas no cálculo: resistência de cálculo, resistência à tração e módulo de elasticidade. Entender essa cadeia evita esperar do concreto o que ele não entrega.",
-      "status": "rascunho",
+      "status": "revisado",
       "pareto": {
         "importancia": 5,
         "frequencia": 5,
@@ -53,7 +53,7 @@
       "tema": "armaduras",
       "titulo": "Aderência entre aço e concreto",
       "resumo": "É a aderência que faz aço e concreto trabalharem juntos. A norma a traduz em uma resistência de aderência de cálculo, que depende da superfície da barra, da posição dela na concretagem, do diâmetro e da resistência à tração do concreto.",
-      "status": "rascunho",
+      "status": "revisado",
       "pareto": {
         "importancia": 4,
         "frequencia": 4,
@@ -97,7 +97,7 @@
       "tema": "durabilidade",
       "titulo": "Limites de abertura de fissuras",
       "resumo": "O concreto armado fissura em serviço, e isso é esperado. A norma não proíbe as fissuras: limita a abertura característica conforme a agressividade do ambiente, para proteger a armadura e manter a aparência aceitável.",
-      "status": "rascunho",
+      "status": "revisado",
       "pareto": {
         "importancia": 4,
         "frequencia": 3,
@@ -123,17 +123,25 @@
         {
           "alvo": "nbr6118:cobrimento-nominal",
           "tipo": "relacionado"
+        },
+        {
+          "alvo": "nbr6118:combinacoes-de-acoes",
+          "tipo": "depende-de"
+        },
+        {
+          "alvo": "nbr6118:aderencia-aco-concreto",
+          "tipo": "depende-de"
         }
       ],
       "temQuiz": true,
-      "temSimulador": false
+      "temSimulador": true
     },
     {
       "id": "nbr6118:classe-agressividade-ambiental",
       "tema": "durabilidade",
       "titulo": "Classe de agressividade ambiental",
       "resumo": "Classifica o ambiente em que a estrutura vai viver. É a primeira decisão do projeto de durabilidade: dela saem a qualidade mínima do concreto, o cobrimento das armaduras e o limite de abertura de fissuras.",
-      "status": "rascunho",
+      "status": "revisado",
       "pareto": {
         "importancia": 5,
         "frequencia": 5,
@@ -175,7 +183,7 @@
       "tema": "durabilidade",
       "titulo": "Cobrimento nominal",
       "resumo": "Espessura de concreto entre a face da peça e a armadura mais externa, indicada no projeto. É o cobrimento mínimo somado à tolerância de execução, e cresce com a agressividade do ambiente.",
-      "status": "rascunho",
+      "status": "revisado",
       "pareto": {
         "importancia": 5,
         "frequencia": 5,
@@ -221,7 +229,7 @@
       "tema": "durabilidade",
       "titulo": "Qualidade do concreto: relação a/c e classe",
       "resumo": "Para cada classe de agressividade, a norma limita a relação água/cimento e exige uma classe mínima de resistência. O objetivo não é resistir mais carga: é obter um concreto menos poroso, que atrase a chegada dos agentes agressivos ao aço.",
-      "status": "rascunho",
+      "status": "revisado",
       "pareto": {
         "importancia": 5,
         "frequencia": 4,
@@ -262,7 +270,7 @@
       "tema": "durabilidade",
       "titulo": "Tolerância de execução (Δc)",
       "resumo": "Folga somada ao cobrimento mínimo para absorver os desvios da obra. Garante que, mesmo com a armadura um pouco fora de posição, o cobrimento mínimo ainda exista na peça pronta.",
-      "status": "rascunho",
+      "status": "revisado",
       "pareto": {
         "importancia": 3,
         "frequencia": 4,
@@ -292,11 +300,57 @@
       "temSimulador": true
     },
     {
+      "id": "nbr6118:combinacoes-de-acoes",
+      "tema": "estados-limites",
+      "titulo": "Combinações de ações",
+      "resumo": "As mesmas cargas entram com pesos diferentes em cada verificação. No estado-limite último elas são majoradas, porque a pergunta é se a estrutura rompe; em serviço entram só as parcelas que de fato acontecem com frequência ou por longos períodos.",
+      "status": "rascunho",
+      "pareto": {
+        "importancia": 5,
+        "frequencia": 5,
+        "dificuldade": 2,
+        "tempoEstudoMin": 15
+      },
+      "tags": [
+        "combinações",
+        "ELU",
+        "ELS",
+        "γf",
+        "ψ0",
+        "ψ1",
+        "ψ2",
+        "frequente",
+        "quase permanente"
+      ],
+      "ondeSeAplica": [
+        "Dimensionamento de qualquer elemento no estado-limite último",
+        "Verificação de abertura de fissuras (combinação frequente)",
+        "Verificação de flechas e efeitos de longa duração (combinação quase permanente)",
+        "Escolha dos esforços de entrada em programas de cálculo"
+      ],
+      "conexoes": [
+        {
+          "alvo": "nbr6118:abertura-de-fissuras",
+          "tipo": "influencia"
+        },
+        {
+          "alvo": "nbr6118:propriedades-do-concreto",
+          "tipo": "relacionado"
+        },
+        {
+          "alvo": "nbr6120:cargas-de-uso",
+          "tipo": "depende-de"
+        }
+      ],
+      "temQuiz": true,
+      "temSimulador": true
+    },
+    {
       "id": "nbr6118:comprimento-de-ancoragem",
       "tema": "detalhamento",
       "titulo": "Comprimento de ancoragem",
       "resumo": "Toda barra precisa de um trecho além do ponto em que deixa de ser necessária, para transferir sua força ao concreto. O comprimento básico vem do equilíbrio entre a força da barra e a aderência; o necessário ajusta esse valor ao caso real.",
-      "status": "rascunho",
+      "status": "revisado",
       "pareto": {
         "importancia": 5,
         "frequencia": 5,

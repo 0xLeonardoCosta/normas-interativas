@@ -6,9 +6,11 @@ import { selo } from '../../ui/components/selo.js';
 import { legendaSelo } from '../controles.js';
 import { carregarDados } from '../../content/loader.js';
 import { alturaUtil, espacamentoLivre } from '../../calc/nbr6118/durabilidade.js';
+import { exigenciasDeCobrimento, espacamentoMinimoHorizontal } from '../../calc/nbr6118/detalhamento.js';
 import { linhasDeRequisitos } from './resolvedores.js';
 
-// Bitolas comerciais usuais (mm). Não são valores normativos desta norma: servem só ao desenho.
+// Bitolas e britas comerciais usuais (mm). Não são valores normativos desta norma: servem só às opções.
+const BRITAS = [{ valor: 9.5, titulo: 'Brita 0', detalhe: 'dmáx 9,5 mm' }, { valor: 19, titulo: 'Brita 1', detalhe: 'dmáx 19 mm' }, { valor: 25, titulo: 'Brita 2', detalhe: 'dmáx 25 mm' }];
 const ESTRIBOS = [5, 6.3, 8, 10];
 const BARRAS = [10, 12.5, 16, 20, 25];
 const LADO = 300; // área útil do desenho, em unidades do viewBox
@@ -16,10 +18,10 @@ const LADO = 300; // área útil do desenho, em unidades do viewBox
 let contador = 0;
 
 export async function montar(container) {
-  const t = await carregarDados('nbr6118', 'durabilidade');
+  const [t, det] = await Promise.all([carregarDados('nbr6118', 'durabilidade'), carregarDados('nbr6118', 'detalhamento')]);
   const uid = `sim-caa-${++contador}`;
 
-  const estado = { caa: 'II', elemento: 'viga-pilar', controleRigoroso: false, bw: 200, h: 500, iT: 0, iL: 2, n: 3 };
+  const estado = { caa: 'II', elemento: 'viga-pilar', controleRigoroso: false, bw: 200, h: 500, iT: 0, iL: 2, n: 3, dmax: 19 };
 
   // --- Controles --------------------------------------------------------------------------------
   const grupo = (legenda, nome, opcoes, atual) =>
@@ -55,6 +57,7 @@ export async function montar(container) {
       h('i', { 'aria-hidden': 'true' }),
       h('span', null, 'Controle rigoroso de execução', h('small', null, 'Reduz a tolerância Δc')),
     ),
+    grupo('Agregado graúdo', 'dmax', BRITAS, estado.dmax),
     h('details', { class: 'sim-secao', open: true },
       h('summary', null, 'Geometria da seção'),
       h('div', { class: 'sim-deslizantes' },
@@ -153,6 +156,9 @@ export async function montar(container) {
     const c = r.cobrimentoNominal;
     const d = alturaUtil({ h: estado.h, c, fiT, fiL });
     const livre = espacamentoLivre({ bw: estado.bw, c, fiT, fiL, n: estado.n });
+    const exig = exigenciasDeCobrimento(det, { cNom: c, fi: fiL, dmax: estado.dmax });
+    const esp = espacamentoMinimoHorizontal(det, { fi: fiL, dmax: estado.dmax });
+    const pend = (b) => b.pendenteValidacao !== false;
 
     const item = (l) =>
       h('div', { class: l.destaque ? 'destaque' : null },
@@ -164,13 +170,26 @@ export async function montar(container) {
       item({ rotulo: 'Cobrimento mínimo (c_nom − Δc)', valor: `${numero(r.cobrimentoMinimo)} mm`, pendente: minimoPendente, referencia: t.cobrimentoNominal.referencia }),
       item({ rotulo: 'Altura útil d', valor: `${numero(d / 10, 1)} cm` }),
       item({ rotulo: 'Espaço livre entre barras', valor: `${numero(livre, 0)} mm` }),
+      item({ rotulo: 'Espaço livre mínimo', valor: `${numero(esp.minimo, 1)} mm`, pendente: pend(det.espacamentoHorizontal), referencia: det.espacamentoHorizontal.referencia }),
+      item({ rotulo: 'Brita máxima para este cobrimento', valor: `${numero(exig.dmaxPermitido, 1)} mm`, pendente: pend(det.cobrimentoEAgregado), referencia: det.cobrimentoEAgregado.referencia }),
     );
-    legenda.hidden = !minimoPendente && !linhas.some((l) => l.pendente);
+    legenda.hidden = !minimoPendente && !linhas.some((l) => l.pendente)
+      && ![det.espacamentoHorizontal, det.cobrimentoEAgregado, det.cobrimentoEBarra].some(pend);
 
     nota.className = 'sim-nota';
     if (livre < 0) {
       nota.classList.add('alerta');
       nota.textContent = 'As barras não cabem em uma camada com esta largura e este cobrimento. Reduza a quantidade ou aumente a largura.';
+    } else if (livre < esp.minimo) {
+      nota.classList.add('alerta');
+      const motivo = { absoluto: 'pelo mínimo absoluto', diametro: 'pelo diâmetro da barra', agregado: 'pelo tamanho da brita' }[esp.governa];
+      nota.textContent = `Sobram ${numero(livre, 0)} mm entre as barras, menos que o mínimo de ${numero(esp.minimo, 1)} mm (governado ${motivo}). O concreto não passaria bem entre elas.`;
+    } else if (!exig.atendeBarra) {
+      nota.classList.add('alerta');
+      nota.textContent = `O cobrimento de ${numero(c)} mm é menor do que o exigido para uma barra de ${numero(fiL, fiL % 1 ? 1 : 0)} mm. Barras grossas pedem cobrimento maior.`;
+    } else if (!exig.atendeAgregado) {
+      nota.classList.add('alerta');
+      nota.textContent = `A brita escolhida não cabe bem num cobrimento de ${numero(c)} mm: o limite é ${numero(exig.dmaxPermitido, 1)} mm. Use uma brita menor ou aumente o cobrimento.`;
     } else if (estado.elemento === 'laje') {
       nota.textContent = 'O cobrimento mostrado é o de laje. O desenho mantém a seção de viga apenas como referência visual de escala.';
     } else {

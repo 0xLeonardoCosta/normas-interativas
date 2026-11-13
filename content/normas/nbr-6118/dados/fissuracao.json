@@ -1,0 +1,28 @@
+{
+  "id": "fissuracao",
+  "observacao": "Fonte única dos coeficientes da estimativa de abertura de fissuras em concreto armado. Todo bloco com pendenteValidacao=true ainda não foi conferido com a norma pelo responsável técnico. Ao validar, troque para false e atualize docs/TODO-NORMA.md.",
+
+  "estadioII": {
+    "referencia": "NBR 6118:2023, item 17.3.3.2",
+    "pendenteValidacao": true,
+    "observacao": "Relação entre os módulos do aço e do concreto admitida no cálculo da tensão na armadura em serviço.",
+    "alfaE": { "valor": 15 }
+  },
+
+  "aberturaEstimada": {
+    "referencia": "NBR 6118:2023, item 17.3.3.2",
+    "pendenteValidacao": true,
+    "observacao": "w = φ / (divisor · η1) · σs / Es · termo; termo 1 = fatorTracao · σs / fctm; termo 2 = coeficienteTaxa / ρr + constanteTaxa. Vale o menor dos dois.",
+    "divisor": 12.5,
+    "fatorTracao": 3,
+    "coeficienteTaxa": 4,
+    "constanteTaxa": 45
+  },
+
+  "regiaoDeEnvolvimento": {
+    "referencia": "NBR 6118:2023, item 17.3.3.2",
+    "pendenteValidacao": true,
+    "observacao": "A área de concreto que envolve cada barra se estende até esta distância do eixo da barra, em diâmetros, limitada pelas faces da peça e pela metade da distância à barra vizinha.",
+    "raioEmDiametros": { "valor": 7.5 }
+  }
+}

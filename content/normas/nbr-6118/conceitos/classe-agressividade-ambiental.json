@@ -75,5 +75,5 @@
   ],
   "pareto": { "importancia": 5, "frequencia": 5, "dificuldade": 1, "tempoEstudoMin": 10 },
   "tags": ["CAA", "ambiente", "corrosão", "carbonatação", "cloretos"],
-  "status": "rascunho"
+  "status": "revisado"
 }

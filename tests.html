@@ -28,6 +28,7 @@
       import { rodar } from './tests/harness.js';
       import suiteCalculo from './tests/calc.test.js';
       import suiteMateriais from './tests/materiais.test.js';
+      import suiteEstruturas from './tests/estruturas.test.js';
       import suiteConteudo from './tests/conteudo.test.js';
 
       const lerJSON = async (caminho) => {
@@ -42,7 +43,7 @@
           (await lerJSON(`content/normas/${pasta}/index.json`)).conceitos.map((c) => c.id.split(':')[1]).sort(),
       };
 
-      const { resultados, avisos, falhas } = await rodar([suiteCalculo, suiteMateriais, suiteConteudo], ambiente);
+      const { resultados, avisos, falhas } = await rodar([suiteCalculo, suiteMateriais, suiteEstruturas, suiteConteudo], ambiente);
       const lista = document.getElementById('lista');
       const item = (classe, texto, detalhe) => {
         const li = document.createElement('li');
