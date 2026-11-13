@@ -9,7 +9,7 @@ import {
   tracaoDeCalculo,
   moduloElasticidade,
 } from '../../calc/nbr6118/materiais.js';
-import { novoUid, grupo, deslizante, criarPaineis, legendaSelo } from '../controles.js';
+import { novoUid, grupo, deslizante, criarPaineis } from '../controles.js';
 
 const L = 460;
 const A = 190;
@@ -133,7 +133,7 @@ export async function montar(container) {
     h('div', { class: 'simulador' },
       controles,
       h('div', { class: 'sim-palco sim-palco-graficos' }, grafTracao.el, grafModulo.el, nota),
-      h('div', { class: 'sim-saida' }, paineis.el, legendaSelo()),
+      h('div', { class: 'sim-saida' }, paineis.el, paineis.legenda),
     ),
   );
   atualizar();

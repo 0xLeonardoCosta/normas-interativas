@@ -3,6 +3,7 @@
 import { h, s, numero } from '../../ui/dom.js';
 import { criarMola } from '../../ui/motion.js';
 import { selo } from '../../ui/components/selo.js';
+import { legendaSelo } from '../controles.js';
 import { carregarDados } from '../../content/loader.js';
 import { alturaUtil, espacamentoLivre } from '../../calc/nbr6118/durabilidade.js';
 import { linhasDeRequisitos } from './resolvedores.js';
@@ -79,6 +80,7 @@ export async function montar(container) {
   const desenho = s('svg', { class: 'sim-desenho', viewBox: '-110 -20 520 370', role: 'img' }, s('title'), ...Object.values(e));
   const nota = h('p', { class: 'sim-nota', role: 'status' });
   const paineis = h('dl', { class: 'sim-resultados', 'aria-live': 'polite' });
+  const legenda = legendaSelo();
 
   let alvo = null; // último resultado calculado
   const mola = criarMola({ valor: 30, rigidez: 260, amortecimento: 24, precisao: 0.02, aoMudar: desenhar });
@@ -156,12 +158,14 @@ export async function montar(container) {
       h('div', { class: l.destaque ? 'destaque' : null },
         h('dt', null, l.rotulo),
         h('dd', null, l.valor, l.pendente && selo(l.referencia, { compacto: true })));
+    const minimoPendente = t.cobrimentoNominal.pendenteValidacao !== false;
     paineis.replaceChildren(
       ...linhas.map(item),
-      item({ rotulo: 'Cobrimento mínimo (c_nom − Δc)', valor: `${numero(r.cobrimentoMinimo)} mm`, pendente: true, referencia: t.cobrimentoNominal.referencia }),
+      item({ rotulo: 'Cobrimento mínimo (c_nom − Δc)', valor: `${numero(r.cobrimentoMinimo)} mm`, pendente: minimoPendente, referencia: t.cobrimentoNominal.referencia }),
       item({ rotulo: 'Altura útil d', valor: `${numero(d / 10, 1)} cm` }),
       item({ rotulo: 'Espaço livre entre barras', valor: `${numero(livre, 0)} mm` }),
     );
+    legenda.hidden = !minimoPendente && !linhas.some((l) => l.pendente);
 
     nota.className = 'sim-nota';
     if (livre < 0) {
@@ -187,7 +191,7 @@ export async function montar(container) {
       h('div', { class: 'sim-palco' }, desenho, nota),
       h('div', { class: 'sim-saida' },
         paineis,
-        h('p', { class: 'legenda-selo' }, selo(), ' Números normativos ainda não conferidos com a norma.'),
+        legenda,
       ),
     ),
   );

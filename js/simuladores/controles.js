@@ -49,13 +49,18 @@ export function alternador({ rotulo, detalhe, chave, estado, aoMudar }) {
  */
 export function criarPaineis() {
   const el = h('dl', { class: 'sim-resultados', 'aria-live': 'polite' });
+  const legenda = legendaSelo();
   return {
     el,
+    legenda,
     mostrar(linhas) {
+      const pendente = (l) => l.bloco && l.bloco.pendenteValidacao !== false;
       el.replaceChildren(...linhas.map((l) =>
         h('div', { class: l.destaque ? 'destaque' : null },
           h('dt', null, l.rotulo),
-          h('dd', null, l.valor, l.bloco && l.bloco.pendenteValidacao !== false && selo(l.bloco.referencia, { compacto: true })))));
+          h('dd', null, l.valor, pendente(l) && selo(l.bloco.referencia, { compacto: true })))));
+      // A legenda só aparece enquanto algum número exibido estiver pendente de validação.
+      legenda.hidden = !linhas.some(pendente);
     },
   };
 }
